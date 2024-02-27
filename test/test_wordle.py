@@ -1,8 +1,10 @@
 import unittest
 from parameterized import parameterized
-from src.wordle import tally, Matches
-# globals().update(Result.__members__) #Feedback: with this line, we can write EXACT_MATCH instead of Matches.EXACT_MATCH in lines below
+from src.wordle import tally, play, Matches, PlayResponse, GameStatus
+
 globals().update(Matches.__members__)
+globals().update(GameStatus.__members__)
+
 class WordleTests(unittest.TestCase):
     def test_canary(self):
         self.assertTrue(True)
@@ -35,6 +37,16 @@ class WordleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, expected_exception):
             tally(target, guess)
 
+
+    def test_play_attempt_0_correct_guess(self):
+        result = play(0, "FAVOR", "FAVOR")
+        
+        self.assertEqual({
+          PlayResponse.Attempts: 1,
+          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Amazing'
+        }, result)
 
 if __name__ == '__main__':
     unittest.main()

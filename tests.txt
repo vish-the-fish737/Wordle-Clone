@@ -1,0 +1,34 @@
+x canary test
+
+x tally for target FAVOR guess FAVOR
+x tally for target FAVOR guess TESTS
+x tally for target FAVOR guess RAPID
+x tally for target FAVOR guess MAYOR
+x tally for target FAVOR guess RIVER
+x tally for target FAVOR guess AMAST
+x tally for target FAVOR guess FOR throws an exception
+x tally for target FAVOR guess FERVER throws an exception
+x tally for target SKILL guess SKILL
+x tally for target SKILL guess SWIRL
+x tally for target SKILL guess CIVIL
+x tally for target SKILL guess SHIMS
+x tally for target SKILL guess SILLY
+x tally for target SKILL guess SLICE
+
+x play with attempt 0 target FAVOR and guess FAVOR
+
+- play deal with invalid guess on first attempt
+- play first attempt with non-winning guess
+
+- play second attempt with winning guess
+- play second attempt with non-winning guess
+- play third attempt with winning guess
+- play third attempt with non-winning guess
+- play fourth attempt with winning guess
+- play fourth attempt with non-winning guess
+- play fifth attempt with winning guess
+- play fifth attempt with non-winning guess
+- play sixth attempt with winning guess
+- play sixth attempt with non-winning guess
+- play seventh attempt with winning guess
+- play eight attempt with non-winning guess
