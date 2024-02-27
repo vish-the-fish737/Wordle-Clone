@@ -17,12 +17,12 @@ x tally for target SKILL guess SLICE
 
 x play with attempt 0 target FAVOR and guess FAVOR
 
-- play deal with invalid guess on first attempt
-- play first attempt with non-winning guess
+x play deal with invalid guess on first attempt
+x play first attempt with non-winning guess
 
-- play second attempt with winning guess
-- play second attempt with non-winning guess
-- play third attempt with winning guess
+x play second attempt with winning guess
+x play second attempt with non-winning guess
+x play third attempt with winning guess
 - play third attempt with non-winning guess
 - play fourth attempt with winning guess
 - play fourth attempt with non-winning guess
