@@ -27,7 +27,7 @@ def is5Letters(guess):
 def exactMatches(target, guess, usedLetters, result):
     for i in range(WORD_SIZE):
         if target[i] == guess[i]:
-            result[i] = Matches.EXACT_MATCH
+            result[i] = Matches.EXACT_MATCH #Feedback: mutating the value given to a function is poor practice
             usedLetters[i] = True
 
 def partialMatches(target, guess, usedLetters, result, remainingLetters):
