@@ -47,6 +47,50 @@ class WordleTests(unittest.TestCase):
           PlayResponse.GameStatus: WON,
           PlayResponse.Message: 'Amazing'
         }, result)
+    
+    def test_play_with_invalid_guess(self):
+        with self.assertRaisesRegex(ValueError, "Word must be 5 letters"):
+          play(0, "FAVOR", "FAR")
+    
+    def test_play_attempt_0_wrong_guess(self):
+        result = play(0, "FAVOR", "TESTS")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 1,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
+          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.Message: ''
+        }, result)
+    
+    def test_play_second_attempt_correct_guess(self):
+        result = play(1, "FAVOR", "FAVOR")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 2,
+          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Splendid'
+        }, result)
+
+    def test_play_second_attempt_wrong_guess(self):
+        result = play(1, "FAVOR", "RIVER")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 2,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.Message: ''
+        }, result)
+
+    def test_play_third_attempt_correct_guess(self):
+        result = play(2, "FAVOR", "FAVOR")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 3,
+          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Awesome'
+        }, result)
 
 if __name__ == '__main__':
     unittest.main()

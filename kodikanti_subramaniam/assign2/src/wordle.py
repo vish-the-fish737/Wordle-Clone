@@ -13,6 +13,7 @@ class PlayResponse(Enum):
   
 class GameStatus(Enum):
     WON = 'Won'
+    IN_PROGRESS = "In Progress"
 
 WORD_SIZE = 5
 
@@ -57,9 +58,28 @@ def tally(target, guess):
 #Feedback:  we can turn the above code into functional style. Please see the assign2reviews.txt for some suggestions.
 
 def play(attempts, target, guess):
+  tally_result = tally(target, guess)
+  
+  message = determine_message(attempts, tally_result)
+  game_status = determine_game_status(attempts, tally_result)
+  
   return {
-          PlayResponse.Attempts: 1,
-          PlayResponse.TallyResult: [Matches.EXACT_MATCH, Matches.EXACT_MATCH, Matches.EXACT_MATCH, Matches.EXACT_MATCH, Matches.EXACT_MATCH],
-          PlayResponse.GameStatus: GameStatus.WON,
-          PlayResponse.Message: 'Amazing'
+          PlayResponse.Attempts: attempts + 1,
+          PlayResponse.TallyResult: tally(target, guess),
+          PlayResponse.GameStatus: game_status,
+          PlayResponse.Message: message
         }
+
+def determine_message(attempts, tally_result):
+  if all(match == Matches.EXACT_MATCH for match in tally_result):
+    messages = ['Amazing', 'Splendid', 'Awesome']
+    
+    return messages[attempts]
+  
+  return ''
+
+def determine_game_status(attempts, tally_result):
+  if all(match == Matches.EXACT_MATCH for match in tally_result):
+    return GameStatus.WON
+  
+  return GameStatus.IN_PROGRESS
