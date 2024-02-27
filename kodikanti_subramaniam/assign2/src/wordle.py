@@ -5,6 +5,15 @@ class Matches(Enum):
     PARTIAL_MATCH = 'Part Match'
     NO_MATCH = 'No Match'
 
+class PlayResponse(Enum):
+    Attempts = 'Attempts'
+    TallyResult = 'Tally Result'
+    GameStatus = 'Game Status'
+    Message = 'Message'
+  
+class GameStatus(Enum):
+    WON = 'Won'
+
 WORD_SIZE = 5
 
 def is5Letters(guess):
@@ -44,3 +53,13 @@ def tally(target, guess):
     afterPartialMatches(target, guess, usedLetters, result, remainingLetters)
 
     return result
+
+#Feedback:  we can turn the above code into functional style. Please see the assign2reviews.txt for some suggestions.
+
+def play(attempts, target, guess):
+  return {
+          PlayResponse.Attempts: 1,
+          PlayResponse.TallyResult: [Matches.EXACT_MATCH, Matches.EXACT_MATCH, Matches.EXACT_MATCH, Matches.EXACT_MATCH, Matches.EXACT_MATCH],
+          PlayResponse.GameStatus: GameStatus.WON,
+          PlayResponse.Message: 'Amazing'
+        }

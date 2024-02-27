@@ -41,3 +41,6 @@ def radon():
 def default():
     pass
 
+@task
+def run():
+    sh('python src/wordleGUI.py')
