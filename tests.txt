@@ -23,12 +23,12 @@ x play first attempt with non-winning guess
 x play second attempt with winning guess
 x play second attempt with non-winning guess
 x play third attempt with winning guess
-- play third attempt with non-winning guess
-- play fourth attempt with winning guess
-- play fourth attempt with non-winning guess
-- play fifth attempt with winning guess
-- play fifth attempt with non-winning guess
-- play sixth attempt with winning guess
+x play third attempt with non-winning guess
+x play fourth attempt with winning guess
+x play fourth attempt with non-winning guess
+x play fifth attempt with winning guess
+x play fifth attempt with non-winning guess
+- play sixth attempt with winning guess #Feedback: can you implement the following tests to move us forward?
 - play sixth attempt with non-winning guess
 - play seventh attempt with winning guess
 - play eight attempt with non-winning guess

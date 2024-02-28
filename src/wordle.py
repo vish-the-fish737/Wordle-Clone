@@ -5,7 +5,7 @@ from collections import Counter
 
 class Matches(Enum):
     EXACT_MATCH = 'Exact Match'
-    PARTIAL_MATCH = 'Part Match'
+    PARTIAL_MATCH = 'Partial Match'
     NO_MATCH = 'No Match'
 
 class PlayResponse(Enum):
@@ -20,63 +20,39 @@ class GameStatus(Enum):
 
 WORD_SIZE = 5
 
-def is5Letters(guess):
+def validate_length(guess):
     if len(guess) != WORD_SIZE:
         raise ValueError("Word must be 5 letters")
-
-def exactMatches(target, guess, usedLetters, result):
-    for i in range(WORD_SIZE):
-        if target[i] == guess[i]:
-            result[i] = Matches.EXACT_MATCH #Feedback: mutating the value given to a function is poor practice
-            usedLetters[i] = True
-
-def partialMatches(target, guess, usedLetters, result, remainingLetters):
-    for i in range(WORD_SIZE):
-        if result[i] == Matches.NO_MATCH and guess[i] in remainingLetters:
-            result[i] = Matches.PARTIAL_MATCH
-            usedLetters[target.index(guess[i])] = True
-            
-def afterPartialMatches(target, guess, usedLetters, result, remainingLetters):
-    for i in range(WORD_SIZE):
-        if result[i] == Matches.PARTIAL_MATCH and guess[i] in remainingLetters:
-            result[i] = Matches.PARTIAL_MATCH
-            usedLetters[target.index(guess[i])] = True
-            
-def lettersLeft(allWordLetters, usedLetters):
-    return [allWordLetters[i] for i in range(WORD_SIZE) if not usedLetters[i]]
 
 
 def tally(target, guess):
-    is_5_letters(guess)
-    response = []
-    for i in range(WORD_SIZE):
-        response.append(tally_for_position(i, target, guess))
-    return response
+  validate_length(guess)
+
+  return [tally_for_position(position, target, guess) for position in range(0, WORD_SIZE)]
 
 def tally_for_position(position, target, guess):
-    if target[position] == guess[position]:
-        return Matches.EXACT
+  if(target[position] == guess[position]):
+    return Matches.EXACT_MATCH
+  
+  letter_at_position = guess[position]
+  
+  positional_matches = count_positional_matches(target, guess, letter_at_position)
+  non_positional_occurrences_in_target = count_number_of_occurrences_until_position(WORD_SIZE - 1, target, letter_at_position) - positional_matches;
     
-    letter = guess[position]
-    positional_matches = count_positional_matches(target, guess, letter)
-    non_positional_occurrences_in_target = count_occurrences_until_position(WORD_SIZE - 1, target, letter) - positional_matches
-    occurrences_in_guess_until_position = count_occurrences_until_position(position, guess, letter)
+  number_of_occurances_in_guess_until_position = count_number_of_occurrences_until_position(position, guess, letter_at_position);
+
+  if(non_positional_occurrences_in_target >= number_of_occurances_in_guess_until_position):
+    return Matches.PARTIAL_MATCH
     
-    if non_positional_occurrences_in_target >= occurrences_in_guess_until_position:
-        return Matches.EXISTS
-    
-    return Matches.NO_MATCH
+  return Matches.NO_MATCH
 
 def count_positional_matches(target, guess, letter):
-    return sum(1 for t, g in zip(target, guess) if t == g and t == letter)
+  return len(list(
+    filter(lambda index: target[index] == guess[index],
+      filter(lambda index: target[index] == letter, range(0, WORD_SIZE)))))
 
-def count_occurrences_until_position(position, word, letter):
-    return Counter(word[:position + 1])[letter]
-
-def is_5_letters(guess):
-    if len(guess) != WORD_SIZE:
-        raise ValueError("Word must be 5 letters")
-
+def count_number_of_occurrences_until_position(position, word, letter):
+  return len(list(filter(lambda ch: ch == letter, word[0: position + 1])))
 
 def play(attempts, target, guess):
   tally_result = tally(target, guess)
@@ -93,7 +69,7 @@ def play(attempts, target, guess):
 
 def determine_message(attempts, tally_result):
   if all(match == Matches.EXACT_MATCH for match in tally_result):
-    messages = ['Amazing', 'Splendid', 'Awesome']
+    messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', 'Yay']
     
     return messages[attempts]
   
