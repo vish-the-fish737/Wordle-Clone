@@ -15,16 +15,15 @@ class WordleTests(unittest.TestCase):
         ("FAVOR", "RAPID", [PARTIAL_MATCH, EXACT_MATCH, NO_MATCH, NO_MATCH, NO_MATCH]),
         ("FAVOR", "MAYOR", [NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH, EXACT_MATCH]),
         ("FAVOR", "RIVER", [NO_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH]),
-        ("FAVOR", "AMAST", [PARTIAL_MATCH, NO_MATCH, PARTIAL_MATCH, NO_MATCH, NO_MATCH]),
-
+        ("FAVOR", "AMAST", [PARTIAL_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH]),
+        
         ("SKILL", "SKILL", [EXACT_MATCH] * 5),
         ("SKILL", "SWIRL", [EXACT_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH]),
-        ("SKILL", "CIVIL", [NO_MATCH, PARTIAL_MATCH, NO_MATCH, PARTIAL_MATCH, EXACT_MATCH]),
+        ("SKILL", "CIVIL", [NO_MATCH, PARTIAL_MATCH, NO_MATCH, NO_MATCH, EXACT_MATCH]),
         ("SKILL", "SHIMS", [EXACT_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, NO_MATCH]),
         ("SKILL", "SILLY", [EXACT_MATCH, PARTIAL_MATCH, PARTIAL_MATCH, EXACT_MATCH, NO_MATCH]),
         ("SKILL", "SLICE", [EXACT_MATCH, PARTIAL_MATCH, EXACT_MATCH, NO_MATCH, NO_MATCH]),
-    ])
-    
+    ])    
     def test_tally(self, target, guess, expected):
         self.assertEqual(tally(target, guess), expected)
 
@@ -91,6 +90,57 @@ class WordleTests(unittest.TestCase):
           PlayResponse.GameStatus: WON,
           PlayResponse.Message: 'Awesome'
         }, result)
+
+    def test_play_third_attempt_incorrect_guess(self):
+        result = play(2, "FAVOR", "TESTS")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 3,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
+          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.Message: ''
+        }, result)
+    
+    def test_play_fourth_attempt_correct_guess(self):
+        result = play(3, "FAVOR", "FAVOR")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 4,
+          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Yay'
+        }, result)
+    
+    def test_play_fourth_attempt_incorrect_guess(self):
+        result = play(3, "FAVOR", "TESTS")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 4,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
+          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.Message: ''
+        }, result)
+    
+    def test_play_fifth_attempt_correct_guess(self):
+        result = play(4, "FAVOR", "FAVOR")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 5,
+          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Yay'
+        }, result)
+    
+    def test_play_fifty_attempt_incorrect_guess(self):
+        result = play(4, "FAVOR", "TESTS")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 5,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
+          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.Message: ''
+        }, result)
+    
 
 if __name__ == '__main__':
     unittest.main()
