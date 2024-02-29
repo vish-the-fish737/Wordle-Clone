@@ -141,6 +141,5 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: ''
         }, result)
     
-
 if __name__ == '__main__':
     unittest.main()
