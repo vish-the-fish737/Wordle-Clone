@@ -51,7 +51,7 @@ def tally_for_position(position, target, guess):
         return "PARTIAL_MATCH"
     return "NO_MATCH"
 
-def count_occurrences_in_guess_until_position(position, word, letter):
+def count_number_of_occurrences_in_guess_until_position(position, word, letter):
     substring = word[:position + 1]
     matches = re.findall(letter, substring)
     return len(matches)
