@@ -37,7 +37,7 @@ def count_positional_matches(target, guess, letter):
     return sum(matches)
 
 def tally_for_position(position, target, guess):
-    letter_at_position = guess[position]
+    letter_at_position = guess
     positional_matches = count_positional_matches(target, guess, letter_at_position)
     non_positional_occurrences_in_target = (
         count_number_of_occurrences_in_guess_until_position(WORD_SIZE - 1, target, letter_at_position)
