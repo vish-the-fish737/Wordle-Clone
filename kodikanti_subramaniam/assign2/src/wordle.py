@@ -2,6 +2,7 @@ from enum import Enum
 import requests
 import random
 from collections import Counter
+import re
 
 class Matches(Enum):
     EXACT_MATCH = 'Exact Match'
@@ -24,35 +25,36 @@ def validate_length(guess):
     if len(guess) != WORD_SIZE:
         raise ValueError("Word must be 5 letters")
 
-
 def tally(target, guess):
-  validate_length(guess)
-
-  return [tally_for_position(position, target, guess) for position in range(0, WORD_SIZE)]
+    return [tally_for_position(i, target, guess) for i, letter in enumerate(guess)]
 
 def tally_for_position(position, target, guess):
-  if(target[position] == guess[position]):
-    return Matches.EXACT_MATCH
+    if target[position] == guess[position]:
+        return 'EXACT_MATCH'
   
-  letter_at_position = guess[position]
-  
-  positional_matches = count_positional_matches(target, guess, letter_at_position)
-  non_positional_occurrences_in_target = count_number_of_occurrences_until_position(WORD_SIZE - 1, target, letter_at_position) - positional_matches;
-    
-  number_of_occurances_in_guess_until_position = count_number_of_occurrences_until_position(position, guess, letter_at_position);
-
-  if(non_positional_occurrences_in_target >= number_of_occurances_in_guess_until_position):
-    return Matches.PARTIAL_MATCH
-    
-  return Matches.NO_MATCH
-
 def count_positional_matches(target, guess, letter):
-  return len(list(
-    filter(lambda index: target[index] == guess[index],
-      filter(lambda index: target[index] == letter, range(0, WORD_SIZE)))))
+    matches = [1 for t, g in zip(target, guess) if t == g and g == letter]
+    return sum(matches)
 
-def count_number_of_occurrences_until_position(position, word, letter):
-  return len(list(filter(lambda ch: ch == letter, word[0: position + 1])))
+def tally_for_position(position, target, guess):
+    letter_at_position = guess[position]
+    positional_matches = count_positional_matches(target, guess, letter_at_position)
+    non_positional_occurrences_in_target = (
+        count_number_of_occurrences_in_guess_until_position(WORD_SIZE - 1, target, letter_at_position)
+        - positional_matches
+    )
+    number_of_occurrences_in_guess_until_position = count_number_of_occurrences_in_guess_until_position(
+        position, guess, letter_at_position
+    )
+    
+    if non_positional_occurrences_in_target >= number_of_occurrences_in_guess_until_position:
+        return "PARTIAL_MATCH"
+    return "NO_MATCH"
+
+def count_occurrences_in_guess_until_position(position, word, letter):
+    substring = word[:position + 1]
+    matches = re.findall(letter, substring)
+    return len(matches)
 
 def play(attempts, target, guess):
   tally_result = tally(target, guess)
