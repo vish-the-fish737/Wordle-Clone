@@ -131,7 +131,7 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: 'Yay'
         }, result)
     
-    def test_play_fifty_attempt_incorrect_guess(self):
+    def test_play_fifth_attempt_incorrect_guess(self):
         result = play(4, "FAVOR", "TESTS")
     
         self.assertEqual({
@@ -140,6 +140,18 @@ class WordleTests(unittest.TestCase):
           PlayResponse.GameStatus: IN_PROGRESS,
           PlayResponse.Message: ''
         }, result)
+    
+    def test_play_sixth_attempt_correct_guess(self):
+        result = play(5, "FAVOR", "FAVOR")
+        
+    def test_play_sixth_attempt_incorrect_guess(self):
+        result = play(5, "FAVOR", "TESTS")
+    
+    def test_play_seventh_attempt_incorrect_guess(self):
+        result = play(6, "FAVOR", "TESTS")
+        
+    def test_play_eighth_attempt_incorrect_guess(self):
+        result = play(7, "FAVOR", "TESTS")
     
 if __name__ == '__main__':
     unittest.main()
