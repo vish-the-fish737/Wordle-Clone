@@ -16,6 +16,7 @@ class PlayResponse(Enum):
 class GameStatus(Enum):
     WON = 'Won'
     IN_PROGRESS = "In Progress"
+    LOST: "Lost"
 
 WORD_SIZE = 5
 
