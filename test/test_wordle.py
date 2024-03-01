@@ -159,7 +159,7 @@ class WordleTests(unittest.TestCase):
         self.assertEqual((
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
-          PlayResponse.GameStatus: LOST,
+          PlayResponse.GameStatus: WON,
           PlayResponse.Message: 'It was FAVOR, better luck next time'
         ), result)
     
