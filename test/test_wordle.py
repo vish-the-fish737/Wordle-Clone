@@ -150,7 +150,7 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
           PlayResponse.GameStatus: WON,
-          PlayResponse.Message: 'It was FAVOR, better luck next time'
+          PlayResponse.Message: 'Yay'
         }, result)
         
     def test_play_sixth_attempt_incorrect_guess(self):
