@@ -24,7 +24,6 @@ def validate_length(guess):
     if len(guess) != WORD_SIZE:
         raise ValueError("Word must be 5 letters")
 
-
 def tally(target, guess):
   validate_length(guess)
 
