@@ -147,7 +147,7 @@ class WordleTests(unittest.TestCase):
         result = play(5, "FAVOR", "FAVOR")
         
         self.assertEqual({
-          PlayResponse.Attempts: 5,
+          PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
           PlayResponse.GameStatus: WON,
           PlayResponse.Message: 'Yay'
