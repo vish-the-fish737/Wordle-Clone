@@ -158,7 +158,7 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Attempts: 5,
           PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
           PlayResponse.GameStatus: LOST,
-          PlayResponse.Message: ''
+          PlayResponse.Message: 'Word is FAVOR. Better luck nest time.'
         }, result)
         
     def test_play_seventh_attempt_incorrect_guess(self):
