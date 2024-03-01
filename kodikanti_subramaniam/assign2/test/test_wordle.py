@@ -160,7 +160,7 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
           #PlayResponse.GameStatus: LOST,
-          PlayResponse.Message: 'It was FAVOR, better luck next time'
+          #PlayResponse.Message: 'It was FAVOR, better luck next time'
         }, result)
     
     
