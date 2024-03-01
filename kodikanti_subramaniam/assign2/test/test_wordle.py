@@ -125,7 +125,7 @@ class WordleTests(unittest.TestCase):
         result = play(4, "FAVOR", "FAVOR")
     
         self.assertEqual({
-          PlayResponse.Attempts: 5,
+          PlayResponse.Attempts: 4,
           PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
           PlayResponse.GameStatus: WON,
           PlayResponse.Message: 'Yay'
@@ -135,7 +135,7 @@ class WordleTests(unittest.TestCase):
         result = play(4, "FAVOR", "TESTS")
     
         self.assertEqual({
-          PlayResponse.Attempts: 5,
+          PlayResponse.Attempts: 4,
           PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
           PlayResponse.GameStatus: IN_PROGRESS,
           PlayResponse.Message: ''
@@ -144,14 +144,41 @@ class WordleTests(unittest.TestCase):
     def test_play_sixth_attempt_correct_guess(self):
         result = play(5, "FAVOR", "FAVOR")
         
+        self.assertEqual({
+          PlayResponse.Attempts: 5,
+          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Yay'
+        }, result)
+        
     def test_play_sixth_attempt_incorrect_guess(self):
         result = play(5, "FAVOR", "TESTS")
     
+        self.assertEqual({
+          PlayResponse.Attempts: 5,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
+          PlayResponse.GameStatus: LOST,
+          PlayResponse.Message: ''
+        }, result)
+        
     def test_play_seventh_attempt_incorrect_guess(self):
         result = play(6, "FAVOR", "TESTS")
         
+        self.assertEqual({
+          PlayResponse.Attempts: 6,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
+          PlayResponse.GameStatus: LOST,
+          PlayResponse.Message: ''
+        }, result)
     def test_play_eighth_attempt_incorrect_guess(self):
         result = play(7, "FAVOR", "TESTS")
+        
+        self.assertEqual({
+          PlayResponse.Attempts: 7,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
+          PlayResponse.GameStatus: LOST,
+          PlayResponse.Message: ''
+        }, result)
     
 if __name__ == '__main__':
     unittest.main()
