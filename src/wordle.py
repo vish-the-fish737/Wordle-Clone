@@ -24,6 +24,7 @@ def validate_length(guess):
     if len(guess) != WORD_SIZE:
         raise ValueError("Word must be 5 letters")
 
+
 def tally(target, guess):
   validate_length(guess)
 
@@ -68,14 +69,17 @@ def play(attempts, target, guess):
 
 def determine_message(attempts, tally_result):
   if all(match == Matches.EXACT_MATCH for match in tally_result):
-    messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', 'Yay']
-    
-    return messages[attempts]
+    messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', "Yay",'You lose']
+    if attempts < 5:
+      return messages[attempts]
   
   return ''
 
 def determine_game_status(attempts, tally_result):
-  if all(match == Matches.EXACT_MATCH for match in tally_result):
+  if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts <= 5:
     return GameStatus.WON
-  
-  return GameStatus.IN_PROGRESS
+  elif attempts > 5:
+    return GameStatus.LOST
+  else:
+    return GameStatus.IN_PROGRESS
+
