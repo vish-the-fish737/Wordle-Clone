@@ -70,8 +70,8 @@ def play(attempts, target, guess):
 def determine_message(attempts, tally_result):
   if all(match == Matches.EXACT_MATCH for match in tally_result):
     messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', 'You lost']
-    
-    return messages[attempts]
+    if attempts <= 5:
+      return messages[attempts]
   
   return ''
 
