@@ -143,5 +143,15 @@ class WordleTests(unittest.TestCase):
 
     #Feedback: please do not change any tests above. Only implement one new test mentioned in tests.txt and minimum code change for that.
     
+    def test_play_sixth_attempt_correct_guess(self):
+        result = play(5, "FAVOR", "FAVOR")
+        
+        self.assertEqual({
+          PlayResponse.Attempts: 5,
+          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Yay'
+        }, result)
+  
 if __name__ == '__main__':
     unittest.main()
