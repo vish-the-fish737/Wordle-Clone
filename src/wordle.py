@@ -16,7 +16,7 @@ class PlayResponse(Enum):
 class GameStatus(Enum):
     WON = 'Won'
     IN_PROGRESS = "In Progress"
-    LOST = "Lost"
+    LOST: "Lost"
 
 WORD_SIZE = 5
 
@@ -69,17 +69,14 @@ def play(attempts, target, guess):
 
 def determine_message(attempts, tally_result):
   if all(match == Matches.EXACT_MATCH for match in tally_result):
-    messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', 'You lose']
-    if attempts < 5:
-      return messages[attempts]
+    messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', 'You lost']
+    
+    return messages[attempts]
   
   return ''
 
 def determine_game_status(attempts, tally_result):
-  if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts <= 5:
+  if all(match == Matches.EXACT_MATCH for match in tally_result):
     return GameStatus.WON
-  elif attempts > 5:
-    return GameStatus.LOST
-  else:
-    return GameStatus.IN_PROGRESS
-
+  
+  return GameStatus.IN_PROGRESS
