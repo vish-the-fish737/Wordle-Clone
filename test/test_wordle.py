@@ -157,7 +157,7 @@ class WordleTests(unittest.TestCase):
     def test_play_sixth_attempt_incorrect_guess(self):
         result = play(5, "FAVOR", "TESTS")
     
-        self.assertEqual({
+        self.assertEqual((
           PlayResponse.Attempts: 5,
           PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH],
           PlayResponse.GameStatus: LOST,
