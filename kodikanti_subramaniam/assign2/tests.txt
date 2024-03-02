@@ -29,6 +29,8 @@ x play fourth attempt with non-winning guess
 x play fifth attempt with winning guess
 x play fifth attempt with non-winning guess
 x play sixth attempt with winning guess
-- play sixth attempt with non-winning guess
-x play seventh attempt with winning guess
-x play eight attempt with non-winning guess
+x play sixth attempt with non-winning guess #Feedback: I wrote this test, could you please implement the next one
+- play seventh attempt with winning guess
+- play eight attempt with non-winning guess
+
+#Feedback: let's think of the next step. Let's list a few tests below and we can decide if we should move forward with those or change directions.
