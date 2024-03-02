@@ -173,7 +173,6 @@ class WordleTests(unittest.TestCase):
         #self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
         #self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
     
-    """
     def test_play_seventh_attempt_incorrect_guess(self):
         result = play(6, "FAVOR", "TESTS")
         
@@ -184,10 +183,10 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: ''
         }
     
-        self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
-        self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
-        self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
-        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+        #self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
+        #self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
+        #self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
+        #self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
     
     def test_play_eighth_attempt_incorrect_guess(self):
         result = play(7, "FAVOR", "TESTS")
@@ -200,12 +199,10 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: ''
         }
     
-        self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
-        self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
-        self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
-        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
-    
-    """
+        #self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
+        #self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
+        #self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
+        #self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
     
 if __name__ == '__main__':
     unittest.main()
