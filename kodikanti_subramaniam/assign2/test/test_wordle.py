@@ -140,8 +140,6 @@ class WordleTests(unittest.TestCase):
           PlayResponse.GameStatus: IN_PROGRESS,
           PlayResponse.Message: ''
         }, result)
-
-    #Feedback: please do not change any tests above. Only implement one new test mentioned in tests.txt and minimum code change for that.
     
     def test_play_sixth_attempt_correct_guess(self):
         result = play(5, "FAVOR", "FAVOR")
