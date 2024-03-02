@@ -76,9 +76,11 @@ def determine_message(attempts, tally_result):
   return ''
 
 def determine_game_status(attempts, tally_result):
-  if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts <= 5:
-    return GameStatus.WON
-  
+  if all(match == Matches.EXACT_MATCH for match in tally_result):
+    if attempts < 6:
+      return GameStatus.WON
+    else:
+      return GameStatus.LOST
   else:
     return GameStatus.IN_PROGRESS
 
