@@ -168,7 +168,7 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: 'It was FAVOR, better luck next time'
         }
     
-        #self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
+        self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
         #self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
         #self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
         #self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
