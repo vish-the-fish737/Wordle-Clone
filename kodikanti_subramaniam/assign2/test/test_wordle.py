@@ -170,8 +170,8 @@ class WordleTests(unittest.TestCase):
     
         self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
         self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
-        self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
-        #self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+        #self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
+        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
     
     """
     def test_play_seventh_attempt_incorrect_guess(self):
