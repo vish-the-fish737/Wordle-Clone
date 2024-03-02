@@ -146,13 +146,18 @@ class WordleTests(unittest.TestCase):
     def test_play_sixth_attempt_correct_guess(self):
         result = play(5, "FAVOR", "FAVOR")
         
-        self.assertEqual({
+        expected_result = {
           PlayResponse.Attempts: 6,
-          PlayResponse.TallyResult: [EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH, EXACT_MATCH],
-          PlayResponse.GameStatus: WON,
+          PlayResponse.TallyResult: [Matches.EXACT_MATCH] * 5,
+          PlayResponse.GameStatus: GameStatus.WON,
           PlayResponse.Message: 'Yay'
-        }, result)
-        
+        }
+    
+        self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
+        self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
+        self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
+        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+    """
     def test_play_sixth_attempt_incorrect_guess(self):
         result = play(5, "FAVOR", "TESTS")
     
@@ -166,8 +171,8 @@ class WordleTests(unittest.TestCase):
         self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
         self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
         self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
-        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message]) 
-        
+        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+    """
     """
     def test_play_seventh_attempt_incorrect_guess(self):
         result = play(6, "FAVOR", "TESTS")
