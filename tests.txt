@@ -30,5 +30,5 @@ x play fifth attempt with winning guess
 x play fifth attempt with non-winning guess
 x play sixth attempt with winning guess
 - play sixth attempt with non-winning guess
-- play seventh attempt with winning guess
+x play seventh attempt with winning guess
 x play eight attempt with non-winning guess
