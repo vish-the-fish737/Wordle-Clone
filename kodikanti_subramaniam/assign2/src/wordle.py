@@ -69,16 +69,16 @@ def play(attempts, target, guess):
 
 def determine_message(attempts, tally_result):
   if all(match == Matches.EXACT_MATCH for match in tally_result):
-    messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', "Yay", "Yay", 'It was FAVOR, better luck next time']
+    messages = ['Amazing', 'Splendid', 'Awesome', 'Yay', "Yay", 'It was FAVOR, better luck next time']
     if attempts <= 5:
-      return messages[attempts]
+      return messages[attempts - 1]
   
   return ''
 
 def determine_game_status(attempts, tally_result):
-  if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts < 5:
+  if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts <= 5:
     return GameStatus.WON
-  elif attempts >= 5:
+  elif attempts > 5:
     return GameStatus.LOST
   else:
     return GameStatus.IN_PROGRESS
