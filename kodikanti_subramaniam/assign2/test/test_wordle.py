@@ -90,7 +90,7 @@ class WordleTests(unittest.TestCase):
           PlayResponse.GameStatus: WON,
           PlayResponse.Message: 'Awesome'
         }, result)
-    """
+
     def test_play_third_attempt_incorrect_guess(self):
         result = play(2, "FAVOR", "TESTS")
     
@@ -100,7 +100,7 @@ class WordleTests(unittest.TestCase):
           PlayResponse.GameStatus: IN_PROGRESS,
           PlayResponse.Message: ''
         }, result)
-    """
+    
     def test_play_fourth_attempt_correct_guess(self):
         result = play(3, "FAVOR", "FAVOR")
     
@@ -151,6 +151,12 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: 'Yay'
         }
     
+        self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
+        self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
+        self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
+        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+        #Feedback: please use one assertEqual like in the previous test instead of four lines above, like so
+
         self.assertEqual({
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [EXACT_MATCH] * 5,
@@ -167,7 +173,12 @@ class WordleTests(unittest.TestCase):
           PlayResponse.GameStatus: IN_PROGRESS,
           PlayResponse.Message: ''
         }, result)
-    
+
+    def test_play_seventh_attempt_correct_guess(self):
+        self.assertRaisesRegex(Exception, "Tries exceeded", play, 6, "FAVOR", "FAVOR")
+
+    def test_play_eigth_attempt_correct_guess(self):
+        self.assertRaisesRegex(Exception, "Tries exceeded", play, 7, "FAVOR", "TESTS")
     
 if __name__ == '__main__':
     unittest.main()
