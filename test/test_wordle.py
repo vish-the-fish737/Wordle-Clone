@@ -143,20 +143,7 @@ class WordleTests(unittest.TestCase):
     
     def test_play_sixth_attempt_correct_guess(self):
         result = play(5, "FAVOR", "FAVOR")
-        
-        expected_result = {
-          PlayResponse.Attempts: 6,
-          PlayResponse.TallyResult: [Matches.EXACT_MATCH] * 5, #Feedback: no need to previous "Matches."
-          PlayResponse.GameStatus: GameStatus.WON, #Feedback: no need to previx "GameStatus."
-          PlayResponse.Message: 'Yay'
-        }
     
-        self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
-        self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
-        self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
-        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
-        #Feedback: please use one assertEqual like in the previous test instead of four lines above, like so
-
         self.assertEqual({
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [EXACT_MATCH] * 5,
@@ -180,8 +167,8 @@ class WordleTests(unittest.TestCase):
     def test_play_eigth_attempt_correct_guess(self):
         self.assertRaisesRegex(Exception, "Tries exceeded", play, 7, "FAVOR", "TESTS")
     
-    #def throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
-    #  self.assertRaisesRegex(NameError, "Wrong spelling", play, 1, "FAVOR", "FEVER")
+    def throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
+      self.assertRaisesRegex(NameError, "Wrong spelling", play, 1, "FAVOR", "FEVER")
       
 if __name__ == '__main__':
     unittest.main()
