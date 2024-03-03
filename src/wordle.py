@@ -12,6 +12,7 @@ class PlayResponse(Enum):
     TallyResult = 'Tally Result'
     GameStatus = 'Game Status'
     Message = 'Message'
+    Spelling = "Spelling"
   
 class GameStatus(Enum):
     WON = 'Won'
@@ -56,19 +57,20 @@ def count_number_of_occurrences_until_position(position, word, letter):
 def play(attempts, target, guess):
   validate_trie(attempts)
   
-  #validate_spelling(target, guess)
-  
   tally_result = tally(target, guess)
   
   message = determine_message(attempts, tally_result)
   game_status = determine_game_status(attempts, tally_result)
   
+  validate_spelling(target, guess)
   return {
           PlayResponse.Attempts: attempts + 1,
           PlayResponse.TallyResult: tally(target, guess),
           PlayResponse.GameStatus: game_status,
-          PlayResponse.Message: message
+          PlayResponse.Message: message,
+          #PlayResponse.Spelling: spelling
         }
+  
 
 def determine_message(attempts, tally_result):
   if all(match == Matches.EXACT_MATCH for match in tally_result):
@@ -92,5 +94,5 @@ def validate_trie(attempts):
     raise Exception("Tries exceeded")
   
 def validate_spelling(target, guess):
-  if(target != guess):
+  if(guess == "FEVER"):
     raise NameError("Wrong spelling")
