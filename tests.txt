@@ -33,5 +33,6 @@ x play sixth attempt with non-winning guess
 x play seventh attempt with winning guess
 x play eight attempt with non-winning guess
 
-#//Feedback: next steps
--play throws an exception for attempt 1, target FAVOR and guess FEVER where FEVER is considered incorrect spelling
+x play throws an exception for attempt 1, target FAVOR and guess FEVER where FEVER is considered incorrect spelling
+- play throws an exception for attempt 2, target FAVOR and guess GLSBQ, because GLSBQ returns false on the site
+- play pick random target for attempt 0
