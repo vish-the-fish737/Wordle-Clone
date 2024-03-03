@@ -55,6 +55,8 @@ def count_number_of_occurrences_until_position(position, word, letter):
   return len(list(filter(lambda ch: ch == letter, word[0: position + 1])))
 
 def play(attempts, target, guess):
+  validate_trie(attempts)
+  
   tally_result = tally(target, guess)
   
   message = determine_message(attempts, tally_result)
@@ -76,22 +78,14 @@ def determine_message(attempts, tally_result):
   return ''
 
 def determine_game_status(attempts, tally_result):
-<<<<<<< .working
-  if all(match == Matches.EXACT_MATCH for match in tally_result):
-    if attempts < 6:
-      return GameStatus.WON
-    else:
-      return GameStatus.LOST
-||||||| .merge-left.r2785
   if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts <= 5:
     return GameStatus.WON
   
-=======
-  if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts <= 5:
-    return GameStatus.WON
-  elif attempts > 5:
-    return GameStatus.LOST
->>>>>>> .merge-right.r2784
   else:
     return GameStatus.IN_PROGRESS
 
+def validate_trie(attempts):
+  MAX_TRIES = 6
+  
+  if(attempts >= MAX_TRIES):
+    raise Exception("Tries exceeded")
