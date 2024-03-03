@@ -67,8 +67,7 @@ def play(attempts, target, guess):
           PlayResponse.Attempts: attempts + 1,
           PlayResponse.TallyResult: tally(target, guess),
           PlayResponse.GameStatus: game_status,
-          PlayResponse.Message: message,
-          #PlayResponse.Spelling: spelling
+          PlayResponse.Message: message
         }
   
 
