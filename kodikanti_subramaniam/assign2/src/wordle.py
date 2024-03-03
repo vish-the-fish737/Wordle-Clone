@@ -56,7 +56,7 @@ def count_number_of_occurrences_until_position(position, word, letter):
 def play(attempts, target, guess):
   validate_trie(attempts)
   
-  validate_spelling(target, guess)
+  #validate_spelling(target, guess)
   
   tally_result = tally(target, guess)
   
