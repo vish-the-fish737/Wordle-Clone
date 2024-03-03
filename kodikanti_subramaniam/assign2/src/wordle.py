@@ -90,6 +90,6 @@ def validate_trie(attempts):
   if(attempts >= MAX_TRIES):
     raise Exception("Tries exceeded")
   
-def validate_spelling(target, guess):
-  if(target != guess):
-    raise Exception("Wrong spelling")
+#def validate_spelling(target, guess):
+#  if(target != guess):
+#    raise Exception("Wrong spelling")
