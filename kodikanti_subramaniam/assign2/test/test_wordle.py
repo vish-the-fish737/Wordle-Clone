@@ -146,15 +146,28 @@ class WordleTests(unittest.TestCase):
         
         expected_result = {
           PlayResponse.Attempts: 6,
-          PlayResponse.TallyResult: [Matches.EXACT_MATCH] * 5,
-          PlayResponse.GameStatus: GameStatus.WON,
+          PlayResponse.TallyResult: [Matches.EXACT_MATCH] * 5, #Feedback: no need to previous "Matches."
+          PlayResponse.GameStatus: GameStatus.WON, #Feedback: no need to previx "GameStatus."
           PlayResponse.Message: 'Yay'
         }
     
-        self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
-        self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
-        self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
-        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+        self.assertEqual({
+          PlayResponse.Attempts: 6,
+          PlayResponse.TallyResult: [EXACT_MATCH] * 5,
+          PlayResponse.GameStatus: WON,
+          PlayResponse.Message: 'Yay'
+        }, result)
+
+    def test_play_fifth_attempt_incorrect_guess(self):
+        result = play(5, "FAVOR", "RIVER")
+    
+        self.assertEqual({
+          PlayResponse.Attempts: 6,
+          PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.Message: ''
+        }, result)
+    
     
 if __name__ == '__main__':
     unittest.main()
