@@ -170,20 +170,21 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [NO_MATCH] * 5,
           PlayResponse.GameStatus: LOST,
-          PlayResponse.Message: ''
+          PlayResponse.Message: 'It was FAVOR, better luck next time'
         }, result)
         """
         
         expected_result = {
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [Matches.NO_MATCH] * 5,
-          PlayResponse.GameStatus: GameStatus.WON,
+          PlayResponse.GameStatus: GameStatus.LOST,
           PlayResponse.Message: 'It was FAVOR, better luck next time'
         }
     
         self.assertEqual(result[PlayResponse.Attempts], expected_result[PlayResponse.Attempts])
         self.assertEqual(result[PlayResponse.TallyResult], expected_result[PlayResponse.TallyResult])
         self.assertEqual(result[PlayResponse.GameStatus], expected_result[PlayResponse.GameStatus])
-        #self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+        self.assertEqual(result[PlayResponse.Message], expected_result[PlayResponse.Message])
+
 if __name__ == '__main__':
     unittest.main()
