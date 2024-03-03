@@ -56,7 +56,7 @@ def count_number_of_occurrences_until_position(position, word, letter):
 
 def play(attempts, target, guess):
   validate_trie(attempts)
-  
+  validate_spelling(target, guess)
   tally_result = tally(target, guess)
   
   message = determine_message(attempts, tally_result)
@@ -89,3 +89,7 @@ def validate_trie(attempts):
   
   if(attempts >= MAX_TRIES):
     raise Exception("Tries exceeded")
+  
+def validate_spelling(target, guess):
+  if(target != guess):
+    raise Exception("Wrong spelling")
