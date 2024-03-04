@@ -12,7 +12,6 @@ class PlayResponse(Enum):
     TallyResult = 'Tally Result'
     GameStatus = 'Game Status'
     Message = 'Message'
-    Spelling = "Spelling"
   
 class GameStatus(Enum):
     WON = 'Won'
@@ -20,6 +19,7 @@ class GameStatus(Enum):
     LOST = "Lost"
 
 WORD_SIZE = 5
+MAX_ATTEMPTS = 6
 
 def validate_length(guess):
     if len(guess) != WORD_SIZE:
@@ -54,8 +54,11 @@ def count_positional_matches(target, guess, letter):
 def count_number_of_occurrences_until_position(position, word, letter):
   return len(list(filter(lambda ch: ch == letter, word[0: position + 1])))
 
-def play(attempts, target, guess):
+def play(attempts, target, guess, is_spelling_correct=lambda word: True):
   validate_trie(attempts)
+  
+  if not is_spelling_correct(guess):
+    raise Exception("Not a word")
   
   tally_result = tally(target, guess)
   
@@ -80,16 +83,16 @@ def determine_message(attempts, tally_result):
   return ''
 
 def determine_game_status(attempts, tally_result):
-  if all(match == Matches.EXACT_MATCH for match in tally_result) and attempts <= 5:
+  if all(match == Matches.EXACT_MATCH for match in tally_result):
     return GameStatus.WON
+
+  if attempts == MAX_ATTEMPTS - 1:
+    return GameStatus.LOST
   
-  else:
-    return GameStatus.IN_PROGRESS
+  return GameStatus.IN_PROGRESS
 
 def validate_trie(attempts):
-  MAX_TRIES = 6
-  
-  if(attempts >= MAX_TRIES):
+  if(attempts >= MAX_ATTEMPTS):
     raise Exception("Tries exceeded")
   
 def validate_spelling(target, guess):
