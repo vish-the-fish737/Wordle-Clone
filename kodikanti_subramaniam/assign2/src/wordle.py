@@ -96,5 +96,5 @@ def validate_trie(attempts):
     raise Exception("Tries exceeded")
   
 def validate_spelling(target, guess):
-  if(guess == "FEVER"):
+  if(guess == "FEVER")# and Levenshtein.distance(target, guess) <= 2:
     raise NameError("Wrong spelling")
