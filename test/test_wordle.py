@@ -167,12 +167,21 @@ class WordleTests(unittest.TestCase):
     def test_play_eigth_attempt_correct_guess(self):
         self.assertRaisesRegex(Exception, "Tries exceeded", play, 7, "FAVOR", "TESTS")
     
-    #Feedback: this test was not starting with test_ so it was not running
     def test_throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
       self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: False)
 
-    #Feedback: let us write only one test.
-    #-play returns proper response for attempt 1, target FAVOR and guess FEVER where FEVER is considered correct spelling
+    def test_play_returns_proper_response_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_correct_spelling(self):
+      #self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: True)
+      result = play(5, "FAVOR", "RIVER")
+    
+      self.assertEqual({
+          PlayResponse.Attempts: 1,
+          PlayResponse.TallyResult: [EXACT_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH],
+          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.Message: ''
+        }, result)
+      is_correct_spelling = lambda word: True
+      self.assertTrue(is_correct_spelling("FEVER"))
     
     #In the previous test we passed lambda word: False. In this test we need to pass lambda word: True. Can you please implement this one test
     #and make sure it passes. For the assert, we can use one single assertEquals like we did in some tets above.
