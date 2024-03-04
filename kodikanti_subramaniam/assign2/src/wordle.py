@@ -1,5 +1,7 @@
 from enum import Enum
 import random
+import Levenshtein
+import reuests
 from collections import Counter
 
 class Matches(Enum):
@@ -65,7 +67,9 @@ def play(attempts, target, guess, is_spelling_correct=lambda word: True):
   message = determine_message(attempts, tally_result)
   game_status = determine_game_status(attempts, tally_result)
   
-  validate_spelling(target, guess)
+  levenshtein(target, guess)
+  validate_spelling(guess)
+  
   return {
           PlayResponse.Attempts: attempts + 1,
           PlayResponse.TallyResult: tally(target, guess),
@@ -91,10 +95,13 @@ def determine_game_status(attempts, tally_result):
   
   return GameStatus.IN_PROGRESS
 
+def have_most_letters_in_common(target, guess):
+  return Levenshtein.distance(target, guess) <= 2
+
 def validate_trie(attempts):
   if(attempts >= MAX_ATTEMPTS):
     raise Exception("Tries exceeded")
   
-def validate_spelling(target, guess):
-  if(guess == "FEVER"):
+def levenshtein(target, guess):
+  if have_most_letters_in_common(target, guess):
     raise NameError("Wrong spelling")
