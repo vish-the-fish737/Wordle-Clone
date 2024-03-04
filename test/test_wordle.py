@@ -151,13 +151,13 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: 'Yay'
         }, result)
 
-    def test_play_fifth_attempt_incorrect_guess(self):
+    def test_play_sixth_attempt_incorrect_guess(self):
         result = play(5, "FAVOR", "RIVER")
     
         self.assertEqual({
           PlayResponse.Attempts: 6,
           PlayResponse.TallyResult: [NO_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH],
-          PlayResponse.GameStatus: IN_PROGRESS,
+          PlayResponse.GameStatus: LOST,
           PlayResponse.Message: ''
         }, result)
 
@@ -167,9 +167,9 @@ class WordleTests(unittest.TestCase):
     def test_play_eigth_attempt_correct_guess(self):
         self.assertRaisesRegex(Exception, "Tries exceeded", play, 7, "FAVOR", "TESTS")
     
-    def throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
-      with self.assertRaisesRegex(NameError, "Wrong spelling"):
-        play(1, "FAVOR", "FEVER")
+    #Feedback: this test was not starting with test_ so it was not running
+    def test_throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
+      self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: False)
       
 if __name__ == '__main__':
     unittest.main()
