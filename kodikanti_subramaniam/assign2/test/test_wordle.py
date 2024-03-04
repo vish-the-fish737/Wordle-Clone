@@ -36,6 +36,7 @@ class WordleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, expected_exception):
             tally(target, guess)
 
+
     def test_play_attempt_0_correct_guess(self):
         result = play(0, "FAVOR", "FAVOR")
         
@@ -166,12 +167,15 @@ class WordleTests(unittest.TestCase):
     def test_play_eigth_attempt_correct_guess(self):
         self.assertRaisesRegex(Exception, "Tries exceeded", play, 7, "FAVOR", "TESTS")
     
+    #Feedback: this test was not starting with test_ so it was not running
     def test_throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
       self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: False)
-      
-    def test_play_throws_an_exception_for_attempt_3_target_FAVOR_and_guess_GLSBQ_because_GLSBQ_returns_false_on_the_site(self):
-      with self.assertRaisesRegex(NameError, "Wrong spelling"):
-        play(1, "FAVOR", "GLSBQ")
+
+    #Feedback: let us write only one test.
+    #-play returns proper response for attempt 1, target FAVOR and guess FEVER where FEVER is considered correct spelling
+    
+    #In the previous test we passed lambda word: False. In this test we need to pass lambda word: True. Can you please implement this one test
+    #and make sure it passes. For the assert, we can use one single assertEquals like we did in some tets above.
       
 if __name__ == '__main__':
     unittest.main()
