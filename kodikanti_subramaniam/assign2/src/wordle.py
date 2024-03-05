@@ -216,6 +216,6 @@ def validate_spelling(target, guess):
   url = f"http://agilec.cs.uh.edu/spellcheck?check={guess}"
   response = requests.get(url)
   boolean = response.text.strip().lower() == "true"
-  if boolean and (levenshtein_distance(target, guess) > 2):
+  if boolean:# and (levenshtein_distance(target, guess) > 2):
     raise NameError("Wrong spelling")
   
