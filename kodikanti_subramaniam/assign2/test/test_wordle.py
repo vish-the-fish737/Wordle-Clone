@@ -170,8 +170,8 @@ class WordleTests(unittest.TestCase):
     def test_throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
       self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: False)
     
-    #def test_play_returns_proper_response_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_correct_spelling(self):
-      #self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: True)
+    def test_play_returns_proper_response_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_correct_spelling(self):
+      self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: True)
       #result = play(5, "FAVOR", "RIVER")
       '''
       self.assertEqual({
