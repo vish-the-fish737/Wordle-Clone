@@ -103,7 +103,7 @@ def validate_spelling(target, guess):
 from enum import Enum
 import random
 from collections import Counter
-from difflib import ndiff
+#from difflib import ndiff
 
 class Matches(Enum):
     EXACT_MATCH = 'Exact Match'
