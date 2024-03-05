@@ -180,5 +180,11 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: ''
         }, result)
 
+    def test_throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_spellcheck_service_throws_an_exception(self):
+        def is_spelling_correct_stub(word):
+            raise Exception("Network Error")
+
+        self.assertRaisesRegex(Exception, "Network Error", play, 1, "FAVOR", "FEVER", is_spelling_correct_stub)
+
 if __name__ == '__main__':
     unittest.main()
