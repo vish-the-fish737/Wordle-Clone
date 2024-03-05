@@ -39,6 +39,8 @@ x play returns proper response for attempt 1, target FAVOR and guess FEVER where
 
 x play throws an exception for attempt 1, target FAVOR and guess FEVER where the spellcheck service fails with a network error
 
-#Feedback: next test
-- get_response takes "FAVOR", accesses the link, return the string 
+x get_response takes "FAVOR", accesses the link, return the string 
 'true'
+
+- get_response takes "FAVRR", accesses the link, return the string 
+'false'
