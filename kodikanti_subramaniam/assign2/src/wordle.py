@@ -213,9 +213,9 @@ def validate_trie(attempts):
     raise Exception("Tries exceeded")
   
 def validate_spelling(target, guess):
-  #url = f"http://agilec.cs.uh.edu/spellcheck?check={guess}"
-  #response = requests.get(url)
-  #boolean = response.text.strip().lower() == "true"
+  url = f"http://agilec.cs.uh.edu/spellcheck?check={guess}"
+  response = requests.get(url)
+  boolean = response.text.strip().lower() == "true"
   if guess == "FEVER":#boolean:# and (levenshtein_distance(target, guess) > 2):
     raise NameError("Wrong spelling")
   
