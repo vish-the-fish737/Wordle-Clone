@@ -103,7 +103,7 @@ def validate_spelling(target, guess):
 from enum import Enum
 import random
 from collections import Counter
-#from difflib import ndiff
+from difflib import ndiff
 
 class Matches(Enum):
     EXACT_MATCH = 'Exact Match'
@@ -216,6 +216,6 @@ def validate_spelling(target, guess):
   #url = f"http://agilec.cs.uh.edu/spellcheck?check={guess}"
   #response = requests.get(url)
   #boolean = response.text.strip().lower() == "true"
-  if guess == "FEVER"#boolean:# and (levenshtein_distance(target, guess) > 2):
+  if guess == "FEVER":#boolean:# and (levenshtein_distance(target, guess) > 2):
     raise NameError("Wrong spelling")
   
