@@ -52,3 +52,8 @@ x parse takes 'true' and returns True
 
 - parse takes 'false' and returns False
 - parse takes 'Invalid text' and throws an exception with message "Invalid response"
+
+#//Feedback: next steps
+x isSpellingCorrect returns true if getResponse returns true and uses parse
+- isSpellingCorrect returns false if getResponse returns false and uses parse
+- isSpellingCorrect throws Network Error if getResponse throws that exception
