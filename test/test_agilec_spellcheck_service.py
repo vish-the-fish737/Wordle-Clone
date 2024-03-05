@@ -1,5 +1,6 @@
 import unittest
-from src.agilec_spellcheck_service import get_response, parse
+from unittest.mock import patch
+from src.agilec_spellcheck_service import get_response, parse, is_spelling_correct
 
 
 class AgilecSpellcheckServiceTests(unittest.TestCase):
@@ -17,6 +18,14 @@ class AgilecSpellcheckServiceTests(unittest.TestCase):
       
     def test_parse_takes_invalid_text(self):
         self.assertRaisesRegex(Exception, "Invalid response", parse, "Invalid text")
+
+    @patch('src.agilec_spellcheck_service.get_response', return_value='true')
+    @patch('src.agilec_spellcheck_service.parse', return_value=True)
+    def test_is_spelling_correct_returns_true_if_getResponse_returns_true_and_uses_parse(self, mock_parse, mock_get_response):
+        self.assertTrue(is_spelling_correct("FAVOR"))
         
+        mock_get_response.assert_called_once_with("FAVOR")
+        mock_parse.assert_called_once_with('true')
+    
 if __name__ == '__main__':
     unittest.main()
