@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(__file__))
 
 @task
 def setup():
-    sh('python -m pip install -U coverage parameterized radon')
+    sh('python -m pip install -U coverage parameterized radon requests')
 
 @task
 def test():
