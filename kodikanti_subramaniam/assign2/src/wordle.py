@@ -102,7 +102,7 @@ def validate_spelling(target, guess):
 
 from enum import Enum
 import random
-import Levenshtein
+#import Levenshtein
 from collections import Counter
 
 class Matches(Enum):
