@@ -44,3 +44,6 @@ x get_response takes "FAVOR", accesses the link, return the string
 
 x get_response takes "FAVRR", accesses the link, return the string 
 'false'
+
+#Feedback: next tests
+- parse takes 'true' and returns True
