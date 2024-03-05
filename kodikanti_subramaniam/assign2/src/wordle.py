@@ -104,6 +104,7 @@ from enum import Enum
 import random
 #import Levenshtein
 from collections import Counter
+from difflib import ndiff
 
 class Matches(Enum):
     EXACT_MATCH = 'Exact Match'
@@ -124,6 +125,20 @@ class GameStatus(Enum):
 WORD_SIZE = 5
 MAX_ATTEMPTS = 6
 
+def levenshtein_distance(str_1, str_2):
+    distance = 0
+    buffer_removed = buffer_added = 0
+    for x in ndiff(str_1, str_2):
+        code = x[0]
+        if code == ' ':
+            distance += max(buffer_removed, buffer_added)
+            buffer_removed = buffer_added = 0
+        elif code == '-':
+            buffer_removed += 1
+        elif code == '+':
+            buffer_added += 1
+    distance += max(buffer_removed, buffer_added)
+    return distance
 def validate_length(guess):
     if len(guess) != WORD_SIZE:
         raise ValueError("Word must be 5 letters")
