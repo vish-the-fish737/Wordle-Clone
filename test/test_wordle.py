@@ -169,22 +169,16 @@ class WordleTests(unittest.TestCase):
     
     def test_throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_incorrect_spelling(self):
       self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: False)
-    
-    def test_play_returns_proper_response_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_correct_spelling(self):
-      #self.assertRaisesRegex(Exception, "Not a word", play, 1, "FAVOR", "FEVER", lambda word: True)
-      result = play(5, "FAVOR", "RIVER")
-      
-      self.assertEqual({
-          PlayResponse.Attempts: 1,
+
+    def test_play_for_attempt_1_target_FAVOR_and_guess_FEVER_where_FEVER_is_considered_correct_spelling(self):
+        result = play(1, "FAVOR", "FEVER", lambda word: True)
+  
+        self.assertEqual({
+          PlayResponse.Attempts: 2,
           PlayResponse.TallyResult: [EXACT_MATCH, NO_MATCH, EXACT_MATCH, NO_MATCH, EXACT_MATCH],
           PlayResponse.GameStatus: IN_PROGRESS,
           PlayResponse.Message: ''
         }, result)
-      is_correct_spelling = lambda word: True
-      self.assertTrue(is_correct_spelling("FEVER"))
-    
-    #In the previous test we passed lambda word: False. In this test we need to pass lambda word: True. Can you please implement this one test
-    #and make sure it passes. For the assert, we can use one single assertEquals like we did in some tets above.
-      
+
 if __name__ == '__main__':
     unittest.main()
