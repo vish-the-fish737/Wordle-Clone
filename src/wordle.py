@@ -216,7 +216,7 @@ def validate_trie(attempts):
 def validate_spelling(target, guess):
   url = f"http://agilec.cs.uh.edu/spellcheck?check={guess}"
   response = requests.get(url)
-  boolean = response.text.strip().lower() == "true"
+  boolean = response.text.strip().lower() == "false"
   if boolean:# and (levenshtein_distance(target, guess) > 2):
     raise NameError("Wrong spelling")
   
