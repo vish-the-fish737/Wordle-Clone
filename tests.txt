@@ -42,5 +42,5 @@ x play throws an exception for attempt 1, target FAVOR and guess FEVER where the
 x get_response takes "FAVOR", accesses the link, return the string 
 'true'
 
-- get_response takes "FAVRR", accesses the link, return the string 
+x get_response takes "FAVRR", accesses the link, return the string 
 'false'
