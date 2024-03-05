@@ -5,7 +5,10 @@ def get_response(word):
   
   return requests.get(f"{URL}{word}").text
 
-def parse(boolean): #Feedback: response instead of boolean
-  if boolean == "true":
+def parse(response):
+  if response == "true":
     return True
-  #Feedback: return response == 'true'
+  elif response == "false":
+    return False
+  elif response == "Invalid text":
+    raise Exception("Invalid response")
