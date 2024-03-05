@@ -102,7 +102,6 @@ def validate_spelling(target, guess):
 
 from enum import Enum
 import random
-#import Levenshtein
 from collections import Counter
 from difflib import ndiff
 
@@ -214,5 +213,8 @@ def validate_trie(attempts):
     raise Exception("Tries exceeded")
   
 def validate_spelling(target, guess):
-  if(guess == "FEVER"):
+  url = f"http://agilec.cs.uh.edu/spellcheck?check={guess}"
+  response = requests.get(url)
+  boolean = response.text.strip().lower() == "true"
+  if boolean and levenshtein_distance(target, guess):
     raise NameError("Wrong spelling")
