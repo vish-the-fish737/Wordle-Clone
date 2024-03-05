@@ -10,6 +10,6 @@ class AgilecSpellcheckServiceTests(unittest.TestCase):
         self.assertEqual(get_response("FAVRR"), "false")
 
     def test_parse_true_returns_True(self):
-        self.assertTrue(parse("true"))
+        self.assertTrue(parse("true")) #Feedback: a blank line after this line, please
 if __name__ == '__main__':
     unittest.main()

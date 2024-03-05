@@ -5,6 +5,7 @@ def get_response(word):
   
   return requests.get(f"{URL}{word}").text
 
-def parse(boolean):
+def parse(boolean): #Feedback: response instead of boolean
   if boolean == "true":
     return True
+  #Feedback: return response == 'true'

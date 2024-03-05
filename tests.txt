@@ -45,5 +45,10 @@ x get_response takes "FAVOR", accesses the link, return the string
 x get_response takes "FAVRR", accesses the link, return the string 
 'false'
 
-#Feedback: next tests
-- parse takes 'true' and returns True
+x parse takes 'true' and returns True
+
+#Feedback: next tests - please remove these feedback notes before asking for a review
+#please mark x when a test is completed.
+
+- parse takes 'false' and returns False
+- parse takes 'Invalid text' and throws an exception with message "Invalid response"
