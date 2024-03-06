@@ -180,7 +180,6 @@ class WordleTests(unittest.TestCase):
           PlayResponse.Message: ''
         }, result)
 
-    #Feedback: why did you remove this test?
     def test_throws_an_exception_for_attempt_1_target_FAVOR_and_guess_FEVER_where_spellcheck_service_throws_an_exception(self):
         def is_spelling_correct_stub(word):
             raise Exception("Network Error")
