@@ -35,13 +35,11 @@ class AgilecSpellcheckServiceTests(unittest.TestCase):
         mock_get_response.assert_called_once_with("FAVOR")
         mock_parse.assert_called_once_with('false')
         
-    #@patch('src.agilec_spellcheck_service.get_response', return_value='false')
-    #@patch('src.agilec_spellcheck_service.parse', return_value=False)
-    #def test_is_spelling_correct_throws_network_error_if_getResponse_throws_error(self, mock_parse, mock_get_response):
-    #    self.assertRaisesRegex(Exception, "Network Error", get_response, "false")
+    def test_is_spelling_correct_throws_network_error_if_getResponse_throws_that_exception(self):
+        def get_response_stub(word):
+            raise Exception("Network Error")
         
-    #    mock_get_response.assert_called_once_with("FAVOR")
-    #    mock_parse.assert_called_once_with('false') 
+        self.assertRaisesRegex(Exception, "Network Error")#, play, 1, "FAVOR", "FEVER", is_spelling_correct_stub)
 
 if __name__ == '__main__':
     unittest.main()
