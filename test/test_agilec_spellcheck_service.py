@@ -35,12 +35,12 @@ class AgilecSpellcheckServiceTests(unittest.TestCase):
         mock_get_response.assert_called_once_with("FAVOR")
         mock_parse.assert_called_once_with('false')
 
-#Feedback: tests.txt says "isSpellingCorrect throws Network Error if getResponse throws that exception" but this test is calling some play instead of the is_spelling_correct function. Actually, the play part is commented out. What is this test doing, let us examine and get this in line to what it should be.
     def test_is_spelling_correct_throws_network_error_if_getResponse_throws_that_exception(self):
         def get_response_stub(word):
             raise Exception("Network Error")
-        
-        self.assertRaisesRegex(Exception, "Network Error")#, play, 1, "FAVOR", "FEVER", is_spelling_correct_stub)
 
+        with patch("src.agilec_spellcheck_service.get_response", side_effect=get_response_stub):
+            self.assertRaisesRegex(Exception, "Network Error", is_spelling_correct, "FAVOR")
+        
 if __name__ == '__main__':
     unittest.main()
