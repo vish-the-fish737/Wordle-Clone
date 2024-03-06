@@ -36,11 +36,16 @@ class AgilecSpellcheckServiceTests(unittest.TestCase):
         mock_parse.assert_called_once_with('false')
 
     def test_is_spelling_correct_throws_network_error_if_getResponse_throws_that_exception(self):
-        def get_response_stub(word):
+        def get_response_stub(word): #Feedback: please remove
             raise Exception("Network Error")
 
         with patch("src.agilec_spellcheck_service.get_response", side_effect=get_response_stub):
             self.assertRaisesRegex(Exception, "Network Error", is_spelling_correct, "FAVOR")
+
+        #Feedback: Good work on this test. We can make this simpler.
+        #@patch('src.agilec_spellcheck_service.get_response', side_effect=Exception("Network Error"))
+        #then within the test we can call self.assertRaisesRegex...
+        
         
 if __name__ == '__main__':
     unittest.main()
