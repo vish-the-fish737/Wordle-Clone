@@ -185,6 +185,6 @@ class WordleTests(unittest.TestCase):
             raise Exception("Network Error")
 
         self.assertRaisesRegex(Exception, "Network Error", play, 1, "FAVOR", "FEVER", is_spelling_correct_stub)
-
+    
 if __name__ == '__main__':
     unittest.main()
