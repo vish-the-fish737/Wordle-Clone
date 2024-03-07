@@ -1,4 +1,5 @@
 import requests
+import random
 
 def get_response(word):
   URL = "http://agilec.cs.uh.edu/spellcheck?check="
@@ -13,3 +14,6 @@ def parse(response):
 
 def is_spelling_correct(word):
   return parse(get_response(word))
+
+def get_a_random_word(word_list):
+  return random.choice(word_list)

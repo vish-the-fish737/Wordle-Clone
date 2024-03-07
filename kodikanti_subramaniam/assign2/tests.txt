@@ -55,9 +55,6 @@ x isSpellingCorrect returns true if getResponse returns true and uses parse
 x isSpellingCorrect returns false if getResponse returns false and uses parse
 x isSpellingCorrect throws Network Error if getResponse throws that exception
 
-#Before writing the following tests, please take a look at all the tests so far and the code so far. Then decide
-#where the following tests should go and where the code should be written.
-#Feedback: next few tests
-- getResponse returns a list of words by calling the webservice
-- getARandomWord given a list of words
-- getARandomWord returns two different words given the same list, on two different calls
+x getResponse returns a list of words by calling the webservice
+x getARandomWord given a list of words
+x getARandomWord returns two different words given the same list, on two different calls
