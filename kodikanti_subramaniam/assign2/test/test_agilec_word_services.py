@@ -1,5 +1,4 @@
 import unittest
-import unittest
 import requests
 from unittest.mock import patch
 from src.agilec_word_services import get_response
