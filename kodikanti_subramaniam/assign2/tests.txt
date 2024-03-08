@@ -55,5 +55,4 @@ x isSpellingCorrect returns true if getResponse returns true and uses parse
 x isSpellingCorrect returns false if getResponse returns false and uses parse
 x isSpellingCorrect throws Network Error if getResponse throws that exception
 
-#Feedback: let's implement this one test, it has to be in a new test file since it is not directly related to anything else above.
-- getResponse returns a list of words by calling the webservice
+x getResponse returns a list of words by calling the webservice

@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import patch
 from src.agilec_spellcheck_service import get_response, parse, is_spelling_correct
 
-
 class AgilecSpellcheckServiceTests(unittest.TestCase):
     def test_get_response_returns_true_for_FAVOR(self):
         self.assertEqual(get_response("FAVOR"), "true")
