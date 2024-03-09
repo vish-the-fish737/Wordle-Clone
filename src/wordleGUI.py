@@ -116,11 +116,7 @@ def draw_current_guess():
         text_rect = text.get_rect(center=(letter_x + box_size / 2, current_guess_y + box_size / 2))
         SCREEN.blit(text, text_rect)
 
-def checkGameEnd():
-    if guesses[-1] == correct_word:
-        message = ""
-        num_guesses = len(guesses)
-
+def message(num_guesses):
         if num_guesses == 1:
             message = "Amazing!"
         elif num_guesses == 2:
@@ -129,6 +125,13 @@ def checkGameEnd():
             message = "Awesome!"
         elif num_guesses <= max_guesses:
             message = "Yay!"
+        return message
+def checkGameEnd():
+    if guesses[-1] == correct_word:
+        message = ""
+        num_guesses = len(guesses)
+
+        message = message(num_guesses)
 
         displayEndMessage(message)
         
