@@ -57,10 +57,9 @@ x isSpellingCorrect throws Network Error if getResponse throws that exception
 
 x getResponse returns a list of words by calling the webservice
 
-#Feedback: next steps
-- getARandomWord given a list of words as argument
-- getARandomWord returns two different words given the same list, on two different calls
-  - for this to work properly, we will have to pass a seed to getARandomWord in addition to
+x getARandomWord given a list of words as argument
+x getARandomWord returns two different words given the same list, on two different calls
+  x for this to work properly, we will have to pass a seed to getARandomWord in addition to
   the words list. In the test we can pass two different seed values, like do
     assertNotEquals(get_a_random_word(words, 1001), get_a_random_word(words, 1002))
 
