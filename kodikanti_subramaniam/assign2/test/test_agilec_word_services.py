@@ -13,5 +13,3 @@ class AgilecWordServicesTests(unittest.TestCase):
     def test_getARandomWord_returns_two_different_words(self):
         words = get_response()
         self.assertNotEqual(get_a_random_word(words, 1001), get_a_random_word(words, 1002))
-
-        
