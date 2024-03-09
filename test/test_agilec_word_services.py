@@ -9,7 +9,8 @@ class AgilecWordServicesTests(unittest.TestCase):
         
     def test_get_a_random_word_given_list_of_words(self):
         self.assertIn(get_a_random_word(get_response()), get_response())
+        #Feedback: we should not be calling get_response when our goal is to test get_a_random_word
 
     def test_getARandomWord_returns_two_different_words(self):
-        words = get_response()
+        words = get_response() #Feedback: plase remove, instead let us create a word list here for use in this test. A blank line after this line, please
         self.assertNotEqual(get_a_random_word(words, 1001), get_a_random_word(words, 1002))
