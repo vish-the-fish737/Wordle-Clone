@@ -10,9 +10,11 @@ class AgilecWordServicesTests(unittest.TestCase):
     def test_get_a_random_word_given_list_of_words(self):
         words = ["FAVOR", "SKILL", "APPLE", "TESTS"]
         
-        self.assertTrue(get_a_random_word(words, 1001) in words)
+        self.assertTrue(get_a_random_word(words, 1001) in words) #Feedback: no need to send the seed here.
         
     def test_getARandomWord_returns_two_different_words(self):
         words = ["FAVOR", "SKILL", "APPLE", "TESTS"]
         
         self.assertNotEqual(get_a_random_word(words, 1001), get_a_random_word(words, 1002))
+        #Feedback: let's make the seed values significantly different to avoid possible overlap of the
+        #value. May be first seed 100, the cond see 10000051
