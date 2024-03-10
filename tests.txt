@@ -63,6 +63,6 @@ x getARandomWord returns two different words given the same list, on two differe
   the words list. In the test we can pass two different seed values, like do
     assertNotEquals(get_a_random_word(words, 1001), get_a_random_word(words, 1002))
 
-Let's integrate the GUI to spellcheck and pick from the words list
+x Let's integrate the GUI to spellcheck and pick from the words list
 We can now bring in the GUI from assign1 to assign2. If the code complexity shows as high,
 we can split functions into smaller functions until the complexity errors go away. After that we can integrate the spellcheck feature in the GUI and then integrate the word pick feature.

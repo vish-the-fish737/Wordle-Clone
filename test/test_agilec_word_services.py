@@ -8,8 +8,9 @@ class AgilecWordServicesTests(unittest.TestCase):
         self.assertTrue(len(get_response()) > 0)
         
     def test_get_a_random_word_given_list_of_words(self):
-        word_list = ["FAVOR", "SKILL", "APPLE", "TESTS"] #Feedback: words instead of word_list. a blank line after this line, please
-        self.assertTrue(get_a_random_word(word_list, 1001) in word_list)
+        words = ["FAVOR", "SKILL", "APPLE", "TESTS"]
+        
+        self.assertTrue(get_a_random_word(words, 1001) in words)
         
     def test_getARandomWord_returns_two_different_words(self):
         words = ["FAVOR", "SKILL", "APPLE", "TESTS"]
