@@ -1,42 +1,42 @@
-# import pygame
-# import sys
-# from src import *
+import pygame
+import sys
+from src import *
 
-# pygame.init()
+pygame.init()
 
-# SCREEN_WIDTH = 600
-# SCREEN_HEIGHT = 800
-# SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-# pygame.display.set_caption('Wordle')
-# FONT = pygame.font.Font(None, 56)
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 800
+SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption('Wordle')
+FONT = pygame.font.Font(None, 56)
 
-# FPS = 60
-# clock = pygame.time.Clock()
+FPS = 60
+clock = pygame.time.Clock()
 
-# WHITE = (255, 255, 255)
-# BLACK = (0, 0, 0)
-# GREEN = (106, 170, 100)
-# YELLOW = (201, 180, 88)
-# GRAY = (120, 124, 126)
-# DARK_MODE_BLACK = (18, 18, 18)
-# USED_LETTER_COLOR= (50,50,50)  
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GREEN = (106, 170, 100)
+YELLOW = (201, 180, 88)
+GRAY = (120, 124, 126)
+DARK_MODE_BLACK = (18, 18, 18)
+USED_LETTER_COLOR= (50,50,50)  
 
-# correct_word = "FAVOR"
-# guesses = []
-# current_guess = ""
-# max_guesses = 6
+correct_word = "FAVOR"
+guesses = []
+current_guess = ""
+max_guesses = 6
 
-# def draw_letter_boxes():
-#     box_size = 60  
-#     box_margin = 20  
-#     start_x = (SCREEN_WIDTH - (len(correct_word) * (box_size + box_margin) - box_margin)) // 2
-#     start_y = 60
+def draw_letter_boxes():
+    box_size = 60  
+    box_margin = 20  
+    start_x = (SCREEN_WIDTH - (len(correct_word) * (box_size + box_margin) - box_margin)) // 2
+    start_y = 60
 
-#     for i in range(max_guesses):
-#         for j in range(len(correct_word)):
-#             box_x = start_x + j * (box_size + box_margin)
-#             box_y = start_y + i * (box_size + box_margin)
-#             pygame.draw.rect(SCREEN, GRAY, (box_x, box_y, box_size, box_size), 3)
+    for i in range(max_guesses):
+        for j in range(len(correct_word)):
+            box_x = start_x + j * (box_size + box_margin)
+            box_y = start_y + i * (box_size + box_margin)
+            pygame.draw.rect(SCREEN, GRAY, (box_x, box_y, box_size, box_size), 3)
 
 # def draw_guesses():
 #     box_size = 60  
