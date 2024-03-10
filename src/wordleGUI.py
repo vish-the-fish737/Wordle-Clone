@@ -69,39 +69,44 @@ def draw_guesses():
             text_rect = text.get_rect(center=(letter_x + box_size / 2, letter_y + box_size / 2))
             SCREEN.blit(text, text_rect)
 
-# def draw_keyboard(guessed_letters):
-#     key_width = 50  
-#     key_height = 60  
-#     key_margin = 5  
-#     start_keyboard_x = 20  
-#     start_keyboard_y = SCREEN_HEIGHT - 230  
+def draw_keyboard(guessed_letters):
+    key_width = 50  
+    key_height = 60  
+    key_margin = 5  
+    start_keyboard_x = 20  
+    start_keyboard_y = SCREEN_HEIGHT - 230  
 
-#     keyboard_rows = [
-#         " QWERTYUIOP",
-#         "  ASDFGHJKL ",
-#         "      ZXCVBNM  "
-#     ]
+    keyboard_rows = [
+        " QWERTYUIOP",
+        "  ASDFGHJKL ",
+        "      ZXCVBNM  "
+    ]
 
-#     for row_idx, row in enumerate(keyboard_rows):
-#         for key_idx, key in enumerate(row.strip()):
-#             key_x = start_keyboard_x + key_idx * (key_width + key_margin) + (len(row) - len(row.strip())) * key_width / 4
-#             key_y = start_keyboard_y + row_idx * (key_height + key_margin)
-            
-#             key_color = GRAY  
+    for row_idx, row in enumerate(keyboard_rows):
+        draw_row(row, row_idx, guessed_letters, start_keyboard_x, start_keyboard_y, key_width, key_height, key_margin)
 
-#             if key in guessed_letters['correct']:
-#                 key_color = GREEN
-#             elif key in guessed_letters['present']:
-#                 key_color = YELLOW
-#             elif key in guessed_letters['absent']:
-#                 key_color = USED_LETTER_COLOR  
+def draw_row(row, row_idx, guessed_letters, start_keyboard_x, start_keyboard_y, key_width, key_height, key_margin):
+    for key_idx, key in enumerate(row.strip()):
+        key_x = start_keyboard_x + key_idx * (key_width + key_margin) + (len(row) - len(row.strip())) * key_width / 4
+        key_y = start_keyboard_y + row_idx * (key_height + key_margin)
+        
+        key_color = get_key_color(key, guessed_letters)
+        
+        pygame.draw.rect(SCREEN, key_color, (key_x, key_y, key_width, key_height))
 
-#             pygame.draw.rect(SCREEN, key_color, (key_x, key_y, key_width, key_height))
+        letter_text = FONT.render(key, True, WHITE)
+        SCREEN.blit(letter_text, (key_x + (key_width - letter_text.get_width()) / 2,
+                                  key_y + (key_height - letter_text.get_height()) / 2))
 
-#             letter_text = FONT.render(key, True, WHITE)
-#             SCREEN.blit(letter_text, (key_x + (key_width - letter_text.get_width()) / 2,
-#                                       key_y + (key_height - letter_text.get_height()) / 2))
-
+def get_key_color(key, guessed_letters):
+    if key in guessed_letters['correct']:
+        return GREEN
+    elif key in guessed_letters['present']:
+        return YELLOW
+    elif key in guessed_letters['absent']:
+        return USED_LETTER_COLOR
+    else:
+        return GRAY
 
 def draw_current_guess():
     box_size = 60
@@ -164,23 +169,28 @@ def displayEndMessage(message):
     
     return restart_rect
 
-# def updateCurrentGuess(event, current_guess, max_length, game_ended):
-#     if not game_ended and event.type == pygame.KEYDOWN:
-#         if event.key == pygame.K_BACKSPACE and len(current_guess) > 0:
-#             current_guess = current_guess[:-1]
-#         elif event.unicode.isalpha() and len(current_guess) < max_length:
-#             current_guess += event.unicode.upper()
+def update_helper(event, current_guess, max_length):
+    if event.key == pygame.K_BACKSPACE and len(current_guess) > 0:
+            current_guess = current_guess[:-1]
+    elif event.unicode.isalpha() and len(current_guess) < max_length:
+            current_guess += event.unicode.upper()
     
-#     return current_guess
+    return current_guess
 
-# def color():
-#     for i, letter in enumerate(current_guess.upper()):
-#         if letter == correct_word[i]:  
-#             guessed_letters['correct'].add(letter)
-#         elif letter in correct_word:
-#             guessed_letters['present'].add(letter)
-#         else:
-#             guessed_letters['absent'].add(letter)
+def updateCurrentGuess(event, current_guess, max_length, game_ended):
+    if not game_ended and event.type == pygame.KEYDOWN:
+        curr_guess = update_helper(event, current_guess, max_length)
+    
+    return curr_guess
+
+def color():
+    for i, letter in enumerate(current_guess.upper()):
+        if letter == correct_word[i]:  
+            guessed_letters['correct'].add(letter)
+        elif letter in correct_word:
+            guessed_letters['present'].add(letter)
+        else:
+            guessed_letters['absent'].add(letter)
 
 def resetBoard():
     global guesses, current_guess, guessed_letters, game_ended
@@ -197,21 +207,28 @@ def draw_components():
 def restartGame():
     resetBoard()
     main()
-    
-# def update():
-#                 if not game_ended:
-#                     if event.key == pygame.K_RETURN and len(current_guess) == len(correct_word):
-#                         guesses.append(current_guess.upper())
-#                         color()
-                        
-#                         current_guess = ""
-#                         checkGameEnd()  
-#                         if len(guesses) > max_guesses or current_guess == correct_word:
-#                             print("Game Over")
-#                             run = False
-#                             game_ended = True
-#                     else:
-#                         current_guess = updateCurrentGuess(event, current_guess, len(correct_word), game_ended)
+
+def update():
+    if not game_ended:
+        if is_enter_pressed(event) and is_guess_complete():
+            process_guess()
+        else:
+            current_guess = update_current_guess(event)
+
+def is_enter_pressed(event):
+    return event.key == pygame.K_RETURN
+
+def is_guess_complete():
+    return len(current_guess) == len(correct_word)
+
+def process_guess():
+    guesses.append(current_guess.upper())
+    color()
+    current_guess = ""
+    check_game_end()
+
+def update_current_guess(event):
+    return updateCurrentGuess(event, current_guess, len(correct_word), game_ended)
 
 def main():
     global current_guess
