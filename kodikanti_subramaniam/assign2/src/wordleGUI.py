@@ -219,7 +219,7 @@ def restartGame():
     resetBoard()
     main()
 
-def update(event):
+def update():
     if not game_ended:
         if is_enter_pressed(event) and is_guess_complete():
             process_guess()
@@ -253,7 +253,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
             elif event.type == pygame.KEYDOWN:
-                update(event)
+                update()
                 
         draw_components()  
         draw_keyboard()
