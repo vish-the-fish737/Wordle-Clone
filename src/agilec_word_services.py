@@ -11,4 +11,3 @@ def get_a_random_word(words, seed=time.time_ns):
     random.seed(seed)
     
     return random.choice(words)
-  
