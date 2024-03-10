@@ -13,5 +13,5 @@ class AgilecWordServicesTests(unittest.TestCase):
         self.assertTrue(get_a_random_word(words, 1001) in words)
         
     def test_getARandomWord_returns_two_different_words(self):
-        words = ["FAVOR", "SKILL", "APPLE", "TESTS"]
+        words = ["FAVOR", "SKILL", "APPLE", "TESTS"] #Feedback: a blank line after this line, please
         self.assertNotEqual(get_a_random_word(words, 1001), get_a_random_word(words, 1002))
