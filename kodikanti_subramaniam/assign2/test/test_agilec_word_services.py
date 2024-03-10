@@ -7,9 +7,10 @@ class AgilecWordServicesTests(unittest.TestCase):
     def test_get_response_returns_list_of_words(self):
         self.assertTrue(len(get_response()) > 0)
         
-    def test_get_a_random_word_given_list_of_words(self, words):
-        self.assertTrue(get_a_random_word(words) in words)
+    def test_get_a_random_word_given_list_of_words(self):
+        word_list = ["FAVOR", "SKILL", "APPLE", "TESTS"]
+        self.assertTrue(get_a_random_word(word_list, 1001) in word_list)
         
     def test_getARandomWord_returns_two_different_words(self):
-        words = ["FAVOR","SKILL", "APPLE", "TESTS"]
+        words = ["FAVOR", "SKILL", "APPLE", "TESTS"]
         self.assertNotEqual(get_a_random_word(words, 1001), get_a_random_word(words, 1002))
