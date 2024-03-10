@@ -1,6 +1,6 @@
 import pygame
 import sys
-import src
+# import src
 
 pygame.init()
 
@@ -21,7 +21,7 @@ GRAY = (120, 124, 126)
 DARK_MODE_BLACK = (18, 18, 18)
 USED_LETTER_COLOR= (50,50,50)  
 
-correct_word = get_a_random_word(get_response())
+correct_word = "FACOR"#get_a_random_word(get_response())
 guesses = []
 current_guess = ""
 max_guesses = 6
@@ -219,7 +219,7 @@ def restartGame():
     resetBoard()
     main()
 
-def update():
+def update(event):
     if not game_ended:
         if is_enter_pressed(event) and is_guess_complete():
             process_guess()
@@ -253,10 +253,10 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
             elif event.type == pygame.KEYDOWN:
-                update()
+                update(event)
                 
         draw_components()  
-        draw_keyboard(guessed_letters) 
+        draw_keyboard()
         pygame.display.update()
         clock.tick(FPS)
 
