@@ -38,36 +38,36 @@ def draw_letter_boxes():
             box_y = start_y + i * (box_size + box_margin)
             pygame.draw.rect(SCREEN, GRAY, (box_x, box_y, box_size, box_size), 3)
 
-# def draw_guesses():
-#     box_size = 60  
-#     box_margin = 20  
-#     start_x = (SCREEN_WIDTH - (len(correct_word) * (box_size + box_margin) - box_margin)) // 2  
-#     start_y = 60  
+def draw_guesses():
+    box_size = 60  
+    box_margin = 20  
+    start_x = (SCREEN_WIDTH - (len(correct_word) * (box_size + box_margin) - box_margin)) // 2  
+    start_y = 60  
     
-#     for i, guess in enumerate(guesses):
-#         result = tally(correct_word, guess)
+    for i, guess in enumerate(guesses):
+        result = tally(correct_word, guess)
         
-#         for j, letter in enumerate(guess):
-#             letter_color = BLACK  
+        for j, letter in enumerate(guess):
+            letter_color = BLACK  
 
-#             if result[j] == Matches.EXACT_MATCH:
-#                 box_color = GREEN
-#                 letter_color = WHITE  
-#             elif result[j] == Matches.PARTIAL_MATCH:
-#                 box_color = YELLOW
-#                 letter_color = WHITE
-#             else:
-#                 box_color = GRAY
-#                 letter_color = WHITE  
+            if result[j] == Matches.EXACT_MATCH:
+                box_color = GREEN
+                letter_color = WHITE  
+            elif result[j] == Matches.PARTIAL_MATCH:
+                box_color = YELLOW
+                letter_color = WHITE
+            else:
+                box_color = GRAY
+                letter_color = WHITE  
 
-#             letter_x = start_x + j * (box_size + box_margin)
-#             letter_y = start_y + i * (box_size + box_margin)
+            letter_x = start_x + j * (box_size + box_margin)
+            letter_y = start_y + i * (box_size + box_margin)
             
-#             pygame.draw.rect(SCREEN, box_color, (letter_x, letter_y, box_size, box_size))
+            pygame.draw.rect(SCREEN, box_color, (letter_x, letter_y, box_size, box_size))
             
-#             text = FONT.render(letter, True, letter_color)
-#             text_rect = text.get_rect(center=(letter_x + box_size / 2, letter_y + box_size / 2))
-#             SCREEN.blit(text, text_rect)
+            text = FONT.render(letter, True, letter_color)
+            text_rect = text.get_rect(center=(letter_x + box_size / 2, letter_y + box_size / 2))
+            SCREEN.blit(text, text_rect)
 
 # def draw_keyboard(guessed_letters):
 #     key_width = 50  
@@ -103,66 +103,66 @@ def draw_letter_boxes():
 #                                       key_y + (key_height - letter_text.get_height()) / 2))
 
 
-# def draw_current_guess():
-#     box_size = 60
-#     box_margin = 20
-#     start_x = (SCREEN_WIDTH - (len(correct_word) * (box_size + box_margin) - box_margin)) // 2
-#     current_guess_y = 60 + len(guesses) * (box_size + box_margin) 
+def draw_current_guess():
+    box_size = 60
+    box_margin = 20
+    start_x = (SCREEN_WIDTH - (len(correct_word) * (box_size + box_margin) - box_margin)) // 2
+    current_guess_y = 60 + len(guesses) * (box_size + box_margin) 
     
-#     for j, letter in enumerate(current_guess):
-#         letter_x = start_x + j * (box_size + box_margin)
+    for j, letter in enumerate(current_guess):
+        letter_x = start_x + j * (box_size + box_margin)
         
-#         text = FONT.render(letter, True, WHITE)
-#         text_rect = text.get_rect(center=(letter_x + box_size / 2, current_guess_y + box_size / 2))
-#         SCREEN.blit(text, text_rect)
+        text = FONT.render(letter, True, WHITE)
+        text_rect = text.get_rect(center=(letter_x + box_size / 2, current_guess_y + box_size / 2))
+        SCREEN.blit(text, text_rect)
 
-# def message(num_guesses):
-#         if num_guesses == 1:
-#             message = "Amazing!"
-#         elif num_guesses == 2:
-#             message = "Splendid!"
-#         elif num_guesses == 3:
-#             message = "Awesome!"
-#         elif num_guesses <= max_guesses:
-#             message = "Yay!"
-#         return message
+def message(num_guesses):
+        if num_guesses == 1:
+            message = "Amazing!"
+        elif num_guesses == 2:
+            message = "Splendid!"
+        elif num_guesses == 3:
+            message = "Awesome!"
+        elif num_guesses <= max_guesses:
+            message = "Yay!"
+        return message
     
-# def checkGameEnd():
-#     if guesses[-1] == correct_word:
-#         message = ""
-#         num_guesses = len(guesses)
+def checkGameEnd():
+    if guesses[-1] == correct_word:
+        message = ""
+        num_guesses = len(guesses)
 
-#         message = message(num_guesses)
+        message = message(num_guesses)
 
-#         displayEndMessage(message)
+        displayEndMessage(message)
         
-#         print(message)
+        print(message)
         
-#     elif len(guesses) == max_guesses:
-#         displayEndMessage("It was {}, better luck next time!".format(correct_word))
-#         print("Game Over! The word was: {}".format(correct_word))  
+    elif len(guesses) == max_guesses:
+        displayEndMessage("It was {}, better luck next time!".format(correct_word))
+        print("Game Over! The word was: {}".format(correct_word))  
 
-# def displayEndMessage(message):
-#     SCREEN.fill(BLACK) 
+def displayEndMessage(message):
+    SCREEN.fill(BLACK) 
 
-#     font_size = 56
-#     text = pygame.font.Font(None, font_size).render(message, True, WHITE)
-#     while text.get_width() > SCREEN_WIDTH - 40:  # Adjusting for margins
-#         font_size -= 1
-#         text = pygame.font.Font(None, font_size).render(message, True, WHITE)
+    font_size = 56
+    text = pygame.font.Font(None, font_size).render(message, True, WHITE)
+    while text.get_width() > SCREEN_WIDTH - 40:  # Adjusting for margins
+        font_size -= 1
+        text = pygame.font.Font(None, font_size).render(message, True, WHITE)
 
-#     text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
-#     SCREEN.blit(text, text_rect)
+    text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+    SCREEN.blit(text, text_rect)
 
-#     restart_text = FONT.render("Restart", True, WHITE)
-#     restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100))
-#     SCREEN.blit(restart_text, restart_rect)
+    restart_text = FONT.render("Restart", True, WHITE)
+    restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100))
+    SCREEN.blit(restart_text, restart_rect)
 
-#     pygame.display.update()
+    pygame.display.update()
 
-#     pygame.time.delay(5000)
+    pygame.time.delay(5000)
     
-#     return restart_rect
+    return restart_rect
 
 # def updateCurrentGuess(event, current_guess, max_length, game_ended):
 #     if not game_ended and event.type == pygame.KEYDOWN:
@@ -182,21 +182,21 @@ def draw_letter_boxes():
 #         else:
 #             guessed_letters['absent'].add(letter)
 
-# def resetBoard():
-#     global guesses, current_guess, guessed_letters, game_ended
-#     guesses.clear()
-#     current_guess = ""
-#     guessed_letters = {'correct': set(), 'present': set(), 'absent': set()}
-#     game_ended = False
+def resetBoard():
+    global guesses, current_guess, guessed_letters, game_ended
+    guesses.clear()
+    current_guess = ""
+    guessed_letters = {'correct': set(), 'present': set(), 'absent': set()}
+    game_ended = False
 
-# def draw_components():
-#     draw_letter_boxes()
-#     draw_guesses()
-#     draw_current_guess()
+def draw_components():
+    draw_letter_boxes()
+    draw_guesses()
+    draw_current_guess()
 
-# def restartGame():
-#     resetBoard()
-#     main()
+def restartGame():
+    resetBoard()
+    main()
     
 # def update():
 #                 if not game_ended:
@@ -213,27 +213,27 @@ def draw_letter_boxes():
 #                     else:
 #                         current_guess = updateCurrentGuess(event, current_guess, len(correct_word), game_ended)
 
-# def main():
-#     global current_guess
-#     guessed_letters = {'correct': set(), 'present': set(), 'absent': set()} 
-#     run = True
-#     game_ended = False
-#     while run:
-#         SCREEN.fill(DARK_MODE_BLACK)
+def main():
+    global current_guess
+    guessed_letters = {'correct': set(), 'present': set(), 'absent': set()} 
+    run = True
+    game_ended = False
+    while run:
+        SCREEN.fill(DARK_MODE_BLACK)
 
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 run = False
-#             elif event.type == pygame.KEYDOWN:
-#                 update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            elif event.type == pygame.KEYDOWN:
+                update()
                 
-#         draw_components()  
-#         draw_keyboard(guessed_letters) 
-#         pygame.display.update()
-#         clock.tick(FPS)
+        draw_components()  
+        draw_keyboard(guessed_letters) 
+        pygame.display.update()
+        clock.tick(FPS)
 
-#     pygame.quit()
-#     sys.exit()
+    pygame.quit()
+    sys.exit()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
