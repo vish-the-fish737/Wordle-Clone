@@ -1,6 +1,6 @@
 import pygame
 import sys
-from src import *
+import src
 
 pygame.init()
 
@@ -27,7 +27,6 @@ current_guess = ""
 max_guesses = 6
 guessed_letters = {'correct': set(), 'present': set(), 'absent': set()}
 game_ended = False
-
 
 def draw_letter_boxes():
     box_size = 60
