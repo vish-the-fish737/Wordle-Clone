@@ -1,6 +1,8 @@
 import pygame
 import sys
-# import src
+from wordle import *
+from agilec_spellcheck_service import *
+from agilec_word_services import *
 
 pygame.init()
 
@@ -21,7 +23,7 @@ GRAY = (120, 124, 126)
 DARK_MODE_BLACK = (18, 18, 18)
 USED_LETTER_COLOR= (50,50,50)  
 
-correct_word = "FACOR"#get_a_random_word(get_response())
+correct_word = "FAVOR"#get_a_random_word(get_response())
 guesses = []
 current_guess = ""
 max_guesses = 6
@@ -158,7 +160,7 @@ def display_end_message(message):
 
     font_size = 56
     text = pygame.font.Font(None, font_size).render(message, True, WHITE)
-    while text.get_width() > SCREEN_WIDTH - 40:  # Adjusting for margins
+    while text.get_width() > SCREEN_WIDTH - 40:
         font_size -= 1
         text = pygame.font.Font(None, font_size).render(message, True, WHITE)
 
@@ -219,12 +221,22 @@ def restartGame():
     resetBoard()
     main()
 
-def update():
+def update(event):
+    global current_guess
     if not game_ended:
-        if is_enter_pressed(event) and is_guess_complete():
-            process_guess()
-        else:
-            current_guess = update_current_guess(event)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN and is_guess_complete():
+                process_guess(current_guess)
+            else:
+                current_guess = update_current_guess(event)
+
+def update_current_guess(event):
+    if event.unicode.isalpha() and len(current_guess) < len(correct_word):
+        return current_guess + event.unicode.upper()
+    elif event.key == pygame.K_BACKSPACE and len(current_guess) > 0:
+        return current_guess[:-1]  
+    else:
+        return current_guess
 
 def is_enter_pressed(event):
     return event.key == pygame.K_RETURN
@@ -232,7 +244,7 @@ def is_enter_pressed(event):
 def is_guess_complete():
     return len(current_guess) == len(correct_word)
 
-def process_guess():
+def process_guess(current_guess):
     guesses.append(current_guess.upper())
     color()
     current_guess = ""
@@ -252,8 +264,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            elif event.type == pygame.KEYDOWN:
-                update()
+            else:
+                update(event)
                 
         draw_components()  
         draw_keyboard()
