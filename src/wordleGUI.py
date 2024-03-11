@@ -23,7 +23,7 @@ GRAY = (120, 124, 126)
 DARK_MODE_BLACK = (18, 18, 18)
 USED_LETTER_COLOR= (50,50,50)  
 
-correct_word = "FAVOR"#get_a_random_word(get_response())
+correct_word = get_a_random_word(get_response(), None)
 guesses = []
 current_guess = ""
 max_guesses = 6
