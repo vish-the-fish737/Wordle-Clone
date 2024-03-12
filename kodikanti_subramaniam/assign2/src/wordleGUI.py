@@ -221,12 +221,31 @@ def restartGame():
     resetBoard()
     main()
 
+def process_guess(current_guess):
+    try:
+        guesses.append(current_guess.upper())
+        color()
+        check_game_end()
+    except Exception as e:
+        display_error_message("Incorrect spelling. Please try again.")
+
+def display_error_message(message):
+    SCREEN.fill(DARK_MODE_BLACK)
+    text = FONT.render(message, True, WHITE)
+    text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+    SCREEN.blit(text, text_rect)
+    draw_components()
+    draw_keyboard()
+    pygame.display.update()
+    pygame.time.delay(2000)
+
 def update(event):
     global current_guess
     if not game_ended:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN and is_guess_complete():
                 process_guess(current_guess)
+                current_guess = ""
             else:
                 current_guess = update_current_guess(event)
 
@@ -247,8 +266,8 @@ def is_guess_complete():
 def process_guess(current_guess):
     guesses.append(current_guess.upper())
     color()
-    current_guess = ""
     check_game_end()
+    current_guess = ""
 
 def update_current_guess(event):
     return updateCurrentGuess(event, current_guess, len(correct_word), game_ended)
