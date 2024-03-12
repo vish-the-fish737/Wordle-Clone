@@ -223,7 +223,8 @@ def restartGame():
 
 def display_error_message(message):
     SCREEN.fill(DARK_MODE_BLACK)
-    text = FONT.render(message, True, WHITE)
+    smaller_font = pygame.font.Font(None, 40)
+    text = smaller_font.render(message, True, WHITE)
     text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
     SCREEN.blit(text, text_rect)
     draw_components()
@@ -258,16 +259,20 @@ def is_guess_complete():
 def process_guess(current_guess):
     try:
         guesses.append(current_guess.upper())
+        if not is_spelling_correct(current_guess):
+            raise Exception("Incorrect spelling. Please try again.")
         color()
         check_game_end()
     except Exception as e:
+        guesses.remove(current_guess.upper())
         display_error_message("Incorrect spelling. Please try again.")
-        reset_current_guess()  # Reset the current guess if it's incorrect
+        reset_current_guess()
 
 def reset_current_guess():
     global current_guess
     current_guess = ""
-
+    guessed_letters = {'correct': set(), 'present': set(), 'absent': set()}
+    
 def update_current_guess(event):
     return updateCurrentGuess(event, current_guess, len(correct_word), game_ended)
 
