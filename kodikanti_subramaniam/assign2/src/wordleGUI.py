@@ -23,7 +23,7 @@ GRAY = (120, 124, 126)
 DARK_MODE_BLACK = (18, 18, 18)
 USED_LETTER_COLOR= (50,50,50)  
 
-correct_word = "FAVOR"#get_a_random_word(get_response(), None)
+correct_word = get_a_random_word(get_response(), None)
 guesses = []
 current_guess = ""
 max_guesses = 6
@@ -221,14 +221,6 @@ def restartGame():
     resetBoard()
     main()
 
-def process_guess(current_guess):
-    try:
-        guesses.append(current_guess.upper())
-        color()
-        check_game_end()
-    except Exception as e:
-        display_error_message("Incorrect spelling. Please try again.")
-
 def display_error_message(message):
     SCREEN.fill(DARK_MODE_BLACK)
     text = FONT.render(message, True, WHITE)
@@ -264,9 +256,16 @@ def is_guess_complete():
     return len(current_guess) == len(correct_word)
 
 def process_guess(current_guess):
-    guesses.append(current_guess.upper())
-    color()
-    check_game_end()
+    try:
+        guesses.append(current_guess.upper())
+        color()
+        check_game_end()
+    except Exception as e:
+        display_error_message("Incorrect spelling. Please try again.")
+        reset_current_guess()  # Reset the current guess if it's incorrect
+
+def reset_current_guess():
+    global current_guess
     current_guess = ""
 
 def update_current_guess(event):
