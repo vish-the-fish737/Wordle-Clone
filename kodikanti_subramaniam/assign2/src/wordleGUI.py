@@ -21,9 +21,10 @@ GREEN = (106, 170, 100)
 YELLOW = (201, 180, 88)
 GRAY = (120, 124, 126)
 DARK_MODE_BLACK = (18, 18, 18)
-USED_LETTER_COLOR= (50,50,50)  
+USED_LETTER_COLOR= (50,50,50)   #Feedback: space after comma, please
 
-correct_word = get_a_random_word(get_response(), None)
+correct_word = get_a_random_word(get_response(), None) #Feedback: please remove None from this line
+
 guesses = []
 current_guess = ""
 max_guesses = 6
