@@ -137,11 +137,9 @@ def check_game_end():
     if guesses[-1] == correct_word:
         message = get_message(len(guesses))
         display_end_message(message)
-        print(message)
         game_ended = True
     elif len(guesses) == max_guesses:
         display_end_message("It was {}, better luck next time!".format(correct_word))
-        print("Game Over! The word was: {}".format(correct_word))
         game_ended = True
 
 
@@ -267,7 +265,6 @@ def process_guess(current_guess):
     except Exception as e:
         guesses.remove(current_guess.upper())
         display_error_message("Incorrect spelling. Please try again.")
-        reset_current_guess()
 
 def reset_current_guess():
     global current_guess
