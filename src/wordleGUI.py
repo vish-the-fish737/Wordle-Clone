@@ -131,7 +131,6 @@ def draw_current_guess():
         text_rect = text.get_rect(center=(letter_x + box_size / 2, current_guess_y + box_size / 2))
         SCREEN.blit(text, text_rect)
 
-
 def check_game_end():
     global game_ended
     if guesses[-1] == correct_word:
@@ -237,7 +236,6 @@ def update(event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN and is_guess_complete():
                 process_guess(current_guess)
-                current_guess = ""
             else:
                 current_guess = update_current_guess(event)
 
@@ -272,7 +270,12 @@ def reset_current_guess():
     guessed_letters = {'correct': set(), 'present': set(), 'absent': set()}
     
 def update_current_guess(event):
-    return updateCurrentGuess(event, current_guess, len(correct_word), game_ended)
+    if event.key == pygame.K_BACKSPACE and len(current_guess) > 0:
+        return current_guess[:-1]
+    elif event.unicode.isalpha() and len(current_guess) < len(correct_word):
+        return current_guess + event.unicode.upper()
+    else:
+        return current_guess
 
 def main():
     global current_guess
@@ -298,4 +301,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
