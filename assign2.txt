@@ -26,3 +26,16 @@ B. When a user presses the "Guess" button, check if the users input is a word wi
 The user can continue to edit the current guess if the word they entered is not a correct spelling. They do not lose a turn if they entered an incorrect spelling. Disable the "Guess" button until the user changes the word after entering a wrong spelling.
 
 Please do not start on the "significant updates" part until we go over the application in the reviews and I give you a green signal that we can start on the updates part.
+
+Total [100]: 95
+Play the game with all the expected features[20]: -5
+The GUI needs some fixing.
+
+All tests pass[10]:
+Test quality[20]:
+Code coverage[10]:
+Quality of design of random word selection[10]:
+Quality of design of spell check feature[10]:
+Programm gracefully handles network failures [10]:
+Code quality[10]:
+
