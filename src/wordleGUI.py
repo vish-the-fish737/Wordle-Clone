@@ -236,6 +236,7 @@ def update(event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN and is_guess_complete():
                 process_guess(current_guess)
+                current_guess = ""
             else:
                 current_guess = update_current_guess(event)
 
